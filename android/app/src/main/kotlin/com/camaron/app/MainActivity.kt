@@ -1,0 +1,6 @@
+package com.camaron.app
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
