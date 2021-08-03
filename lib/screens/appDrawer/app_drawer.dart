@@ -5,6 +5,7 @@ import 'package:app/screens/profilePage/book_a_service.dart';
 import 'package:app/screens/profilePage/settings_page.dart';
 import 'package:app/screens/profilePage/support_page.dart';
 import 'package:app/screens/statisticsPage/statistics_page.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'feed_calculator_page.dart';
 
 class AppDrawer extends StatelessWidget {
+  final _auth = auth.FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -21,7 +23,7 @@ class AppDrawer extends StatelessWidget {
           children: [
             UserAccountsDrawerHeader(
               accountName: Text(
-                'UserName',
+                _auth!.displayName ?? '',
                 style: GoogleFonts.roboto(
                   fontSize: 18,
                   color: Colors.black,
@@ -29,7 +31,7 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
               accountEmail: Text(
-                'c*******@gmail.com',
+                _auth!.email ?? '',
                 style: GoogleFonts.roboto(
                   fontSize: 16,
                   color: Colors.black,
@@ -52,7 +54,7 @@ class AppDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: SvgPicture.asset(
-                'assets/icons/device.svg',
+                'assets/device.png',
                 width: 28,
                 height: 28,
               ),
@@ -73,7 +75,7 @@ class AppDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: SvgPicture.asset(
-                'assets/icons/stats.svg',
+                'assets/stats.png',
                 width: 28,
                 height: 28,
               ),
@@ -94,7 +96,7 @@ class AppDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: SvgPicture.asset(
-                'assets/icons/creature.svg',
+                'assets/fish.png',
                 width: 28,
                 height: 28,
                 color: Colors.black,
@@ -115,11 +117,12 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: SvgPicture.asset(
-                'assets/icons/calci.svg',
-                width: 28,
-                height: 28,
-              ),
+              // leading: SvgPicture.asset(
+              //   'assets/icons/calci.svg',
+              //   width: 28,
+              //   height: 28,
+              // ),
+              leading: Icon(Icons.calculate),
               title: Text(
                 'Feed Calculator',
                 style: GoogleFonts.roboto(

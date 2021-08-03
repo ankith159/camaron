@@ -59,9 +59,13 @@ class AuthService {
   Future verifyOtp(smsCode) async {
     auth.PhoneAuthCredential credential = auth.PhoneAuthProvider.credential(
         verificationId: code!.id, smsCode: smsCode);
-    var user = await authUser!.linkWithCredential(credential);
 
-    return _userFromFirebaseUser(user.user);
+    return credential;
+  }
+
+  Future linkCredential(credential) async {
+    var user = await authUser!.linkWithCredential(credential);
+    return user;
   }
 
   //sign in with phone credentials
@@ -108,6 +112,23 @@ class AuthService {
 
   //Register with email and password
   registerEmailPass(email, password) async {
+    try {
+      auth.UserCredential user = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      await createUserDoc(user);
+    } on auth.FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  //Register with email and password
+  linkEmailPass(email, password) async {
     try {
       auth.UserCredential user = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);

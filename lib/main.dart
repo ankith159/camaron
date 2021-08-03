@@ -1,5 +1,6 @@
 import 'package:app/screens/authentication/login/login_screen.dart';
 import 'package:app/screens/tab_page.dart';
+import 'package:app/static_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:auth/auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -13,7 +14,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  var app = await Firebase.initializeApp();
+  StaticData.app = app;
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     MaterialApp(

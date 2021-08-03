@@ -118,6 +118,7 @@ class _SettingPageState extends State<SettingPage> {
               GestureDetector(
                 onTap: () {
                   AuthService().signOut();
+                  Navigator.pop(context);
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10),

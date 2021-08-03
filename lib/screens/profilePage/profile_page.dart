@@ -1,6 +1,7 @@
 import 'package:app/screens/appDrawer/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 import 'ask_a_demo.dart';
 import 'book_a_service.dart';
@@ -16,6 +17,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  var _auth = auth.FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.only(right: 78, top: 70),
                     child: Text(
-                      'User Name',
+                      _auth.currentUser!.displayName ?? '',
                       style: GoogleFonts.roboto(
                           fontSize: 20,
                           color: Colors.black87,
@@ -76,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Text(
-                      'c*********@gmail.com',
+                      _auth.currentUser!.email ?? '',
                       style: GoogleFonts.roboto(
                         fontSize: 18,
                         color: Colors.black87,

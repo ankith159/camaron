@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddNewDevicePage extends StatefulWidget {
   const AddNewDevicePage({Key? key}) : super(key: key);
@@ -9,6 +11,28 @@ class AddNewDevicePage extends StatefulWidget {
 }
 
 class _AddNewDevicePageState extends State<AddNewDevicePage> {
+  addDevice() {
+    var _auth = auth.FirebaseAuth.instance;
+    FirebaseFirestore.instance.collection('devices').doc().set({
+      'deviceId': deviceId.text,
+      'uid': _auth.currentUser!.uid,
+      'phone': _auth.currentUser!.phoneNumber,
+      'name': name.text
+    });
+    // print(StaticData.app);
+    // final FirebaseDatabase database = FirebaseDatabase(app: StaticData.app);
+    // print(',id');
+    // var _auth = auth.FirebaseAuth.instance;
+    // await database
+    //     .reference()
+    //     .child('devices')
+    //     .child(deviceId.text)
+    //     .set({'uid': _auth.currentUser!.uid});
+  }
+
+  TextEditingController deviceId = TextEditingController();
+  TextEditingController name = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +76,7 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                     ),
                     SizedBox(height: 8),
                     TextField(
+                      controller: name,
                       decoration: InputDecoration(
                         labelText: "Name",
                         labelStyle: GoogleFonts.ptSans(
@@ -108,13 +133,19 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                     ),
                     SizedBox(height: 8),
                     TextField(
+                      controller: deviceId,
                       decoration: InputDecoration(
-                        labelText: "Device Id",
-                        labelStyle: GoogleFonts.ptSans(
+                        hintText: "Device Id",
+                        hintStyle: GoogleFonts.ptSans(
                           fontSize: 13,
                           color: Colors.black54,
                         ),
                         enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Theme.of(context).primaryColor),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        focusedBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Theme.of(context).primaryColor),
                           borderRadius: BorderRadius.circular(8),
@@ -142,7 +173,16 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                     ),
                     textScaleFactor: 1,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    try {
+                      addDevice();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Device added')));
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error adding device')));
+                    }
+                  },
                 ),
               ),
             ],
