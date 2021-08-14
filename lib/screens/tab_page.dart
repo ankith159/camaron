@@ -1,3 +1,4 @@
+import 'package:app/screens/creaturePage/selece_device.dart';
 import 'package:flutter/material.dart';
 import 'creaturePage/creatures_page.dart';
 import 'devicePage/device_page.dart';
@@ -17,7 +18,7 @@ class _TabPageState extends State<TabPage> {
 
   List<Widget> list = [
     DevicesPage(),
-    CreaturesPage(),
+    SelectDevicePage(),
     HomePage(),
     StatisticsPage(),
     ProfilePage(),

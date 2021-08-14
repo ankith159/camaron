@@ -54,9 +54,12 @@ class _SignupFormState extends State<SignupForm> {
                       SizedBox(height: 8),
                       TextFormField(
                           controller: name,
+                          validator: (value) {
+                            if (value == null) return 'Name can\'t be null';
+                          },
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(left: 10),
-                            hintText: "Email/Phone",
+                            hintText: "Name",
                             hintStyle: GoogleFonts.ptSans(
                               fontSize: 13,
                               color: Colors.black54,
@@ -86,9 +89,15 @@ class _SignupFormState extends State<SignupForm> {
                       TextFormField(
                           keyboardType: TextInputType.phone,
                           controller: phone,
+                          validator: (value) {
+                            if (value == null)
+                              return 'Phone number can\'t be empty';
+                            if (value.length != 10)
+                              return 'Invalid phone number';
+                          },
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(left: 10),
-                            hintText: "Email/Phone",
+                            hintText: "Phone Number",
                             hintStyle: GoogleFonts.ptSans(
                               fontSize: 13,
                               color: Colors.black54,
@@ -120,7 +129,7 @@ class _SignupFormState extends State<SignupForm> {
                           controller: email,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(left: 10),
-                            hintText: "Email/Phone",
+                            hintText: "Email",
                             hintStyle: GoogleFonts.ptSans(
                               fontSize: 13,
                               color: Colors.black54,
@@ -157,9 +166,10 @@ class _SignupFormState extends State<SignupForm> {
                                 ? null
                                 : "Does not meet password requirement";
                           },
+                          obscureText: true,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(left: 10),
-                            hintText: "Email/Phone",
+                            hintText: "Password",
                             hintStyle: GoogleFonts.ptSans(
                               fontSize: 13,
                               color: Colors.black54,
@@ -188,6 +198,7 @@ class _SignupFormState extends State<SignupForm> {
                       SizedBox(height: 8),
                       TextFormField(
                           controller: reEnterPassword,
+                          obscureText: true,
                           validator: (value) {
                             if (password.text == reEnterPassword.text)
                               return null;
@@ -196,7 +207,7 @@ class _SignupFormState extends State<SignupForm> {
                           },
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(left: 10),
-                            hintText: "Email/Phone",
+                            hintText: "Re-Enter Password",
                             hintStyle: GoogleFonts.ptSans(
                               fontSize: 13,
                               color: Colors.black54,
@@ -235,7 +246,7 @@ class _SignupFormState extends State<SignupForm> {
                               setState(() {
                                 _loading = true;
                               });
-                              await AuthService().sendOtp(phone.text);
+                              await AuthService().sendOtp('+91' + phone.text);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

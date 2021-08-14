@@ -9,6 +9,7 @@ class ChangePage extends StatefulWidget {
 }
 
 class _ChangePageState extends State<ChangePage> {
+  String type = 'Type';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +26,48 @@ class _ChangePageState extends State<ChangePage> {
             textScaleFactor: 1,
           ),
         ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Radio(value: 'Fishes', groupValue: type, onChanged: (value) {}),
+              Container(
+                margin: EdgeInsets.only(left: 50),
+                child: Column(
+                  children: [
+                    Radio(
+                        value: 'Fishes',
+                        groupValue: type,
+                        onChanged: (value) {}),
+                    Radio(
+                        value: 'Fishes',
+                        groupValue: type,
+                        onChanged: (value) {}),
+                    Radio(
+                        value: 'Fishes',
+                        groupValue: type,
+                        onChanged: (value) {}),
+                    Radio(
+                        value: 'Fishes',
+                        groupValue: type,
+                        onChanged: (value) {}),
+                    Radio(
+                        value: 'Fishes',
+                        groupValue: type,
+                        onChanged: (value) {}),
+                  ],
+                ),
+              )
+            ],
+          ),
+          Radio(value: 'Oyesters', groupValue: type, onChanged: (value) {}),
+          Radio(value: 'Calms', groupValue: type, onChanged: (value) {}),
+          Radio(value: 'Prawns', groupValue: type, onChanged: (value) {}),
+        ],
       ),
     );
   }

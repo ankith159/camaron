@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'change_page.dart';
 
 class CreaturesPage extends StatefulWidget {
-  const CreaturesPage({Key? key}) : super(key: key);
+  final String name;
+  CreaturesPage(this.name);
 
   @override
   _CreaturesPageState createState() => _CreaturesPageState();
