@@ -22,6 +22,7 @@ class _SelectDevicePageState extends State<SelectDevicePage> {
 
   List<DataSnapshot?> deviceList = [];
   var list = [];
+  List<QueryDocumentSnapshot> docList = [];
 
   Future getDevices() async {
     var _auth = auth.FirebaseAuth.instance;
@@ -33,6 +34,7 @@ class _SelectDevicePageState extends State<SelectDevicePage> {
     final FirebaseDatabase database = FirebaseDatabase(app: StaticData.app);
 
     devices.docs.forEach((element) async {
+      docList.add(element);
       var doc = await database
           .reference()
           .child('devices')
@@ -73,7 +75,8 @@ class _SelectDevicePageState extends State<SelectDevicePage> {
         padding: EdgeInsets.all(15),
         child: ListView.builder(
             itemCount: list.length,
-            itemBuilder: (ctx, index) => ManageDeviceCard(name: list[index])),
+            itemBuilder: (ctx, index) =>
+                ManageDeviceCard(name: list[index], id: docList[index].id)),
       ),
       // floatingActionButton: Padding(
       //   padding: const EdgeInsets.all(16.0),
@@ -99,7 +102,9 @@ class _SelectDevicePageState extends State<SelectDevicePage> {
 
 class ManageDeviceCard extends StatelessWidget {
   final String name;
-  const ManageDeviceCard({Key? key, required this.name}) : super(key: key);
+  final String id;
+  const ManageDeviceCard({Key? key, required this.name, required this.id})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +113,7 @@ class ManageDeviceCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CreaturesPage(name),
+            builder: (context) => CreaturesPage(id),
           ),
         );
       },

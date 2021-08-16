@@ -85,7 +85,7 @@ class _CreaturesPageState extends State<CreaturesPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ChangePage(),
+                            builder: (context) => ChangePage(widget.name),
                           ),
                         );
                       },
