@@ -47,7 +47,9 @@ class _ProfilePageState extends State<ProfilePage> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Center(
+              Container(
+                height: 130,
+                width: 130,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 18, top: 50),
                   child: CircleAvatar(
@@ -56,38 +58,54 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: ClipOval(
                       child: Icon(
                         Icons.person,
-                        size: 100,
+                        size: 60,
                       ),
                     ),
                   ),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 78, top: 70),
-                    child: Text(
-                      _auth.currentUser!.displayName ?? '',
-                      style: GoogleFonts.roboto(
-                          fontSize: 20,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold),
-                      textScaleFactor: 1,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 78, top: 70),
+                            child: Text(
+                              _auth.currentUser!.displayName ?? '',
+                              style: GoogleFonts.roboto(
+                                  fontSize: 20,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold),
+                              textScaleFactor: 1,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Text(
-                      _auth.currentUser!.email ?? '',
-                      style: GoogleFonts.roboto(
-                        fontSize: 18,
-                        color: Colors.black87,
-                      ),
-                      textScaleFactor: 1,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              _auth.currentUser!.email ?? '',
+                              style: GoogleFonts.roboto(
+                                fontSize: 15,
+                                color: Colors.black87,
+                              ),
+                              maxLines: 1,
+                              textScaleFactor: 1,
+                              overflow: TextOverflow.fade,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 40.0),
