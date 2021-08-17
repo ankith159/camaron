@@ -92,88 +92,164 @@ class _StatisticsPageState extends State<StatisticsPage> {
             ),
           ),
         ),
-        body: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Flexible(
-              child: LineChart(LineChartData(
-                minX: 0,
-                maxX: 10,
-                maxY: 50,
-                minY: 0,
-                lineBarsData: [
-                  LineChartBarData(
-                      spots: List.generate(
-                          temp.length,
-                          (index) => FlSpot(
-                              double.parse(index.toString()), temp[index])))
-                ],
-              )),
-            ),
-            Flexible(
-              child: LineChart(LineChartData(
-                minX: 0,
-                maxX: 10,
-                maxY: 14,
-                minY: 0,
-                lineBarsData: [
-                  LineChartBarData(
-                      spots: List.generate(
-                          ph.length,
-                          (index) => FlSpot(
-                              double.parse(index.toString()), ph[index])))
-                ],
-              )),
-            ),
-            Flexible(
-              child: LineChart(LineChartData(
-                titlesData: FlTitlesData(
-                  leftTitles: SideTitles(
-                    showTitles: true,
-                    interval: 20,
-                    getTextStyles: (value) => const TextStyle(
-                        color: Colors.blueGrey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14),
-                    margin: 15,
+        body: Container(
+          margin: EdgeInsets.only(left: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Temperature",
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Flexible(
+                child: Container(
+                  margin: EdgeInsets.only(top: 5, right: 20, left: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xFFFFC542),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.8),
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        offset: Offset(0, 2), // changes position of shadow
+                      ),
+                    ],
                   ),
-                  rightTitles: SideTitles(showTitles: false),
-                  bottomTitles: SideTitles(
-                    showTitles: true,
-                    getTextStyles: (value) => const TextStyle(
-                        color: Colors.blueGrey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                    margin: 16,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      margin: EdgeInsets.only(right: 10, top: 7),
+                      child: LineChart(
+                        LineChartData(
+                          minX: 0,
+                          maxX: 10,
+                          maxY: 50,
+                          minY: 0,
+                          lineBarsData: [
+                            LineChartBarData(
+                                spots: List.generate(
+                                    temp.length,
+                                    (index) => FlSpot(
+                                        double.parse(index.toString()),
+                                        temp[index])))
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  topTitles: SideTitles(showTitles: false),
                 ),
-                gridData: FlGridData(
-                  show: true,
-                  verticalInterval: 20,
-                  drawHorizontalLine: true,
-                  drawVerticalLine: true,
-                  checkToShowHorizontalLine: (value) {
-                    return value.toInt() == 0;
-                  },
-                  checkToShowVerticalLine: (value) {
-                    return value.toInt() == 0;
-                  },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "PH Value",
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Flexible(
+                child: Container(
+                  margin: EdgeInsets.only(top: 5, right: 20, left: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xFF3EC94C),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.8),
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        offset: Offset(0, 2), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      margin: EdgeInsets.only(right: 10, top: 7),
+                      child: LineChart(
+                        LineChartData(
+                          minX: 0,
+                          maxX: 10,
+                          maxY: 14,
+                          minY: 0,
+                          lineBarsData: [
+                            LineChartBarData(
+                                spots: List.generate(
+                                    ph.length,
+                                    (index) => FlSpot(
+                                        double.parse(index.toString()),
+                                        ph[index])))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                minX: 0,
-                maxX: 10,
-                maxY: 180,
-                minY: 0,
-                lineBarsData: [
-                  LineChartBarData(
-                      spots: List.generate(
-                          oxy.length,
-                          (index) => FlSpot(
-                              double.parse(index.toString()), oxy[index])))
-                ],
-              )),
-            )
-          ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Oxygen Value",
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Flexible(
+                child: Container(
+                  margin: EdgeInsets.only(top: 5, right: 20, left: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xFF359EBF),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.8),
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        offset: Offset(0, 2), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      margin: EdgeInsets.only(right: 10, top: 7),
+                      child: LineChart(
+                        LineChartData(
+                          minX: 0,
+                          maxX: 10,
+                          maxY: 180,
+                          minY: 0,
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: List.generate(
+                                oxy.length,
+                                (index) => FlSpot(
+                                  double.parse(index.toString()),
+                                  oxy[index],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         )
         // body: Container(
         //   padding: EdgeInsets.all(15),
