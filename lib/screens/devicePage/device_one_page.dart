@@ -22,6 +22,8 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
     getDevices();
   }
 
+  final FirebaseDatabase database = FirebaseDatabase(app: StaticData.app);
+
   Future<DataSnapshot?> getDevices() async {
     final FirebaseDatabase database = FirebaseDatabase(app: StaticData.app);
     var doc =
@@ -49,223 +51,235 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.all(0),
-                child: Text(
-                  "Device Id - ${widget.name}",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.roboto(
-                      fontSize: 20,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold),
-                  textScaleFactor: 1,
-                ),
-              ),
-              SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.only(top: 18, right: 20, left: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'pH Value',
-                      style: GoogleFonts.ptSans(
-                        fontSize: 20,
-                        color: Colors.black87,
+      body: StreamBuilder(
+          stream:
+              database.reference().child('devices').child(widget.name).onValue,
+          builder: (context, AsyncSnapshot<Event> snapshot) {
+            if (!snapshot.hasData)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            return SafeArea(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                alignment: Alignment.center,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: Text(
+                        "Device Id - ${widget.name}",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold),
+                        textScaleFactor: 1,
                       ),
                     ),
-                    data == null
-                        ? Container()
-                        : Text(
-                            data!.value['pH'].toString(),
+                    SizedBox(height: 15),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 18, right: 20, left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'pH Value',
+                            style: GoogleFonts.ptSans(
+                              fontSize: 20,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Text(
+                            snapshot.data!.snapshot.value['pH']
+                                .toStringAsFixed(3),
                             style: GoogleFonts.ptSans(
                               fontSize: 20,
                               color: Colors.red,
                             ),
                           ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 10, right: 20, left: 20, top: 10),
-                child: Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8, right: 20, left: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Dissolved Oxygen levels',
-                      style: GoogleFonts.ptSans(
-                        fontSize: 20,
-                        color: Colors.black87,
+                        ],
                       ),
                     ),
-                    data == null
-                        ? Container()
-                        : Text(
-                            data!.value['Dissolved Oxygen'].toString(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 10, right: 20, left: 20, top: 10),
+                      child: Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 8, right: 20, left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Dissolved Oxygen levels',
                             style: GoogleFonts.ptSans(
                               fontSize: 20,
-                              color: Colors.orange,
+                              color: Colors.black87,
                             ),
                           ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 10, right: 20, left: 20, top: 10),
-                child: Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8, right: 20, left: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Temperature',
-                      style: GoogleFonts.ptSans(
-                        fontSize: 20,
-                        color: Colors.black87,
+                          data == null
+                              ? Container()
+                              : Text(
+                                  snapshot
+                                      .data!.snapshot.value['Dissolved Oxygen']
+                                      .toStringAsFixed(3),
+                                  style: GoogleFonts.ptSans(
+                                    fontSize: 20,
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                        ],
                       ),
                     ),
-                    data == null
-                        ? Container()
-                        : Text(
-                            data!.value['Temperature'].toString(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 10, right: 20, left: 20, top: 10),
+                      child: Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 8, right: 20, left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Temperature',
                             style: GoogleFonts.ptSans(
                               fontSize: 20,
-                              color: Colors.green,
+                              color: Colors.black87,
                             ),
                           ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 10, right: 20, left: 20, top: 10),
-                child: Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, left: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      "Areator Controller",
-                      style: GoogleFonts.roboto(
-                        fontSize: 16,
-                        color: Colors.black87,
+                          data == null
+                              ? Container()
+                              : Text(
+                                  snapshot.data!.snapshot.value['Temperature']
+                                      .toStringAsFixed(3),
+                                  style: GoogleFonts.ptSans(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                        ],
                       ),
                     ),
-                    Switch(
-                      activeColor: Colors.black12,
-                      activeTrackColor: Colors.teal,
-                      value: _switchValue,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _switchValue = newValue;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 58),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10, left: 52),
-                    child: OutlinedButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return DeleteDialog();
-                            });
-                      },
-                      child: Text(
-                        'Delete',
-                        style: GoogleFonts.roboto(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 10, right: 20, left: 20, top: 10),
+                      child: Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Theme.of(context).primaryColor,
                       ),
-                      style: OutlinedButton.styleFrom(
-                          side: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 1),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 34, vertical: 15),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10, right: 52),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        setState(() {
-                          _refresh = true;
-                        });
-                        try {
-                          await getDevices();
-                        } catch (e) {}
-                        setState(() {
-                          _refresh = false;
-                        });
-                      },
-                      child: _refresh
-                          ? CircularProgressIndicator(
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20, left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Areator Controller",
+                            style: GoogleFonts.roboto(
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Switch(
+                            activeColor: Colors.black12,
+                            activeTrackColor: Colors.teal,
+                            value: _switchValue,
+                            onChanged: (newValue) {
+                              setState(() {
+                                _switchValue = newValue;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 58),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return DeleteDialog();
+                                });
+                          },
+                          child: Text(
+                            'Delete',
+                            style: GoogleFonts.roboto(
+                              fontSize: 16,
                               color: Colors.black,
-                            )
-                          : Text(
-                              'Refresh',
-                              style: GoogleFonts.roboto(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              fontWeight: FontWeight.bold,
                             ),
-                      style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 34, vertical: 15),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                              side: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 1),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 34, vertical: 15),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(bottom: 10, right: 52),
+                        //   child: ElevatedButton(
+                        //     onPressed: () async {
+                        //       setState(() {
+                        //         _refresh = true;
+                        //       });
+                        //       try {
+                        //         await getDevices();
+                        //       } catch (e) {}
+                        //       setState(() {
+                        //         _refresh = false;
+                        //       });
+                        //     },
+                        //     child: _refresh
+                        //         ? CircularProgressIndicator(
+                        //             color: Colors.black,
+                        //           )
+                        //         : Text(
+                        //             'Refresh',
+                        //             style: GoogleFonts.roboto(
+                        //               fontSize: 16,
+                        //               color: Colors.black,
+                        //               fontWeight: FontWeight.bold,
+                        //             ),
+                        //           ),
+                        //     style: ElevatedButton.styleFrom(
+                        //         primary: Theme.of(context).primaryColor,
+                        //         padding: EdgeInsets.symmetric(
+                        //             horizontal: 34, vertical: 15),
+                        //         shape: RoundedRectangleBorder(
+                        //             borderRadius: BorderRadius.circular(10))),
+                        //   ),
+                        // ),
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
+            );
+          }),
     );
   }
 }
