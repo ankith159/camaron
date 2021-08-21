@@ -59,6 +59,15 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
               return Center(
                 child: CircularProgressIndicator(),
               );
+            if (snapshot.hasError)
+              return Center(
+                child: Text('No data Found'),
+              );
+            if (snapshot.data!.snapshot.value == null)
+              return Center(
+                child: Text('No data Found'),
+              );
+
             return SafeArea(
               child: Container(
                 height: MediaQuery.of(context).size.height,
