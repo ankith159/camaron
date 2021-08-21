@@ -6,7 +6,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StatisticsPage extends StatefulWidget {
-  const StatisticsPage({Key? key}) : super(key: key);
+  final String name;
+  const StatisticsPage(this.name);
 
   @override
   _StatisticsPageState createState() => _StatisticsPageState();
@@ -15,40 +16,31 @@ class StatisticsPage extends StatefulWidget {
 class _StatisticsPageState extends State<StatisticsPage> {
   initState() {
     super.initState();
-    var ref = database.reference().child('devices').child('CAM001');
+    var ref = database.reference().child('devices').child(widget.name);
     ref.onValue.listen((event) => addData(event));
   }
 
+  Map graphs = {};
   addData(event) {
-    print('yo');
-    // dat.add(
-    //     TimeSeriesSales(DateTime.now(), event.snapshot.value['Temperature']));
-    // });
+    DataSnapshot data = event.snapshot;
+    Map keys = data.value;
+    graphs = keys;
     temp.removeAt(0);
     ph.removeAt(0);
     oxy.removeAt(0);
     setState(() {
-      temp.add(event.snapshot.value['Temperature']);
-      ph.add(event.snapshot.value['pH'] ?? ph.last);
-      oxy.add(event.snapshot.value['Dissolved Oxygen'] ?? oxy.last);
+      Map keys = data.value;
+      if (keys.containsKey('Temperature'))
+        temp.add(event.snapshot.value['Temperature']);
+      if (keys.containsKey('pH')) ph.add(event.snapshot.value['pH']);
+      if (keys.containsKey('Dissolved Oxygen'))
+        oxy.add(event.snapshot.value['Dissolved Oxygen']);
     });
   }
 
-  List<DataSnapshot?> data = [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null
-  ];
-  List<double> temp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  List<double> ph = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  List<double> oxy = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  List<dynamic> temp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  List<dynamic> ph = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  List<dynamic> oxy = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   final FirebaseDatabase database = FirebaseDatabase(app: StaticData.app);
   List<TimeSeriesSales> dat = [];
 
@@ -89,161 +81,283 @@ class _StatisticsPageState extends State<StatisticsPage> {
         ),
         body: Container(
           margin: EdgeInsets.only(left: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Temperature",
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Flexible(
-                child: Container(
-                  margin: EdgeInsets.only(top: 5, right: 20, left: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color(0xFFFFC542),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.8),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset: Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      margin: EdgeInsets.only(right: 10, top: 7),
-                      child: LineChart(
-                        LineChartData(
-                          minX: 0,
-                          maxX: 10,
-                          maxY: 50,
-                          minY: 0,
-                          lineBarsData: [
-                            LineChartBarData(
-                                spots: List.generate(
-                                    temp.length,
-                                    (index) => FlSpot(
-                                        double.parse(index.toString()),
-                                        temp[index])))
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "PH Value",
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Flexible(
-                child: Container(
-                  margin: EdgeInsets.only(top: 5, right: 20, left: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color(0xFF3EC94C),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.8),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset: Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      margin: EdgeInsets.only(right: 10, top: 7),
-                      child: LineChart(
-                        LineChartData(
-                          minX: 0,
-                          maxX: 10,
-                          maxY: 14,
-                          minY: 0,
-                          lineBarsData: [
-                            LineChartBarData(
-                                spots: List.generate(
-                                    ph.length,
-                                    (index) => FlSpot(
-                                        double.parse(index.toString()),
-                                        ph[index])))
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Oxygen Value",
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Flexible(
-                child: Container(
-                  margin: EdgeInsets.only(top: 5, right: 20, left: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color(0xFF359EBF),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.8),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset: Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      margin: EdgeInsets.only(right: 10, top: 7),
-                      child: LineChart(
-                        LineChartData(
-                          minX: 0,
-                          maxX: 10,
-                          maxY: 180,
-                          minY: 0,
-                          lineBarsData: [
-                            LineChartBarData(
-                              spots: List.generate(
-                                oxy.length,
-                                (index) => FlSpot(
-                                  double.parse(index.toString()),
-                                  oxy[index],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                (!graphs.containsKey('Temperature'))
+                    ? Container()
+                    : Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Temperature",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Flexible(
+                            child: Container(
+                              height: 200,
+                              margin:
+                                  EdgeInsets.only(top: 5, right: 20, left: 20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xFFFFC542),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.8),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 10, top: 7),
+                                  child: LineChart(
+                                    LineChartData(
+                                      gridData: FlGridData(
+                                          show: true,
+                                          drawHorizontalLine: true,
+                                          horizontalInterval: 5,
+                                          getDrawingHorizontalLine: (value) {
+                                            return FlLine(
+                                                color: Colors.white,
+                                                strokeWidth: 1);
+                                          }),
+                                      titlesData: FlTitlesData(
+                                        leftTitles: SideTitles(
+                                          showTitles: true,
+                                          reservedSize: 22,
+                                          getTextStyles: (value) =>
+                                              const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                          margin: 10,
+                                          getTitles: (value) {
+                                            if (value.toInt() % 10 == 0) {
+                                              return '${value.toInt()}';
+                                            } else {
+                                              return '';
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                      minX: 0,
+                                      maxX: 10,
+                                      maxY: 50,
+                                      minY: 0,
+                                      lineBarsData: [
+                                        LineChartBarData(
+                                            spots: List.generate(
+                                                temp.length,
+                                                (index) => FlSpot(
+                                                    double.parse(
+                                                        index.toString()),
+                                                    double.parse(temp[index]
+                                                        .toString()))))
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+                (!graphs.containsKey('pH'))
+                    ? Container()
+                    : Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "PH Value",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Flexible(
+                            child: Container(
+                              height: 200,
+                              margin:
+                                  EdgeInsets.only(top: 5, right: 20, left: 20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xFF3EC94C),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.8),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 10, top: 7),
+                                  child: LineChart(
+                                    LineChartData(
+                                      gridData: FlGridData(
+                                          show: true,
+                                          drawHorizontalLine: true,
+                                          horizontalInterval: 2,
+                                          getDrawingHorizontalLine: (value) {
+                                            return FlLine(
+                                                color: Colors.white,
+                                                strokeWidth: 1);
+                                          }),
+                                      titlesData: FlTitlesData(
+                                        leftTitles: SideTitles(
+                                          showTitles: true,
+                                          reservedSize: 22,
+                                          getTextStyles: (value) =>
+                                              const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                          margin: 10,
+                                          getTitles: (value) {
+                                            if (value.toInt() % 2 == 0) {
+                                              return '${value.toInt()}';
+                                            } else {
+                                              return '';
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                      minX: 0,
+                                      maxX: 10,
+                                      maxY: 14,
+                                      minY: 0,
+                                      lineBarsData: [
+                                        LineChartBarData(
+                                            spots: List.generate(
+                                                ph.length,
+                                                (index) => FlSpot(
+                                                    double.parse(
+                                                        index.toString()),
+                                                    double.parse(
+                                                        ph[index].toString()))))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                (!graphs.containsKey('Dissolved Oxygen'))
+                    ? Container()
+                    : Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Oxygen Value",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Flexible(
+                            child: Container(
+                              height: 200,
+                              margin:
+                                  EdgeInsets.only(top: 5, right: 20, left: 20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xFF359EBF),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.8),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 10, top: 7),
+                                  child: LineChart(
+                                    LineChartData(
+                                      gridData: FlGridData(
+                                        horizontalInterval: 20,
+                                        show: true,
+                                        drawHorizontalLine: true,
+                                        getDrawingHorizontalLine: (value) {
+                                          return FlLine(
+                                              color: Colors.white,
+                                              strokeWidth: 1);
+                                        },
+                                      ),
+                                      titlesData: FlTitlesData(
+                                        leftTitles: SideTitles(
+                                          showTitles: true,
+                                          reservedSize: 22,
+                                          getTextStyles: (value) =>
+                                              const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                          margin: 10,
+                                          getTitles: (value) {
+                                            if (value.toInt() % 20 == 0) {
+                                              return '${value.toInt()}';
+                                            } else {
+                                              return '';
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                      minX: 0,
+                                      maxX: 10,
+                                      maxY: 180,
+                                      minY: 0,
+                                      lineBarsData: [
+                                        LineChartBarData(
+                                          spots: List.generate(
+                                            oxy.length,
+                                            (index) => FlSpot(
+                                              double.parse(index.toString()),
+                                              double.parse(
+                                                  oxy[index].toString()),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+              ],
+            ),
           ),
         )
         // body: Container(

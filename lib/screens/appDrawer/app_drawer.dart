@@ -4,7 +4,7 @@ import 'package:app/screens/profilePage/ask_a_demo.dart';
 import 'package:app/screens/profilePage/book_a_service.dart';
 import 'package:app/screens/profilePage/settings_page.dart';
 import 'package:app/screens/profilePage/support_page.dart';
-import 'package:app/screens/statisticsPage/statistics_page.dart';
+import 'package:app/screens/statisticsPage/selece_device_stat.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -90,7 +90,7 @@ class AppDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => StatisticsPage(),
+                      builder: (context) => SelectDeviceStatPage(),
                     ));
               },
             ),

@@ -1,9 +1,9 @@
 import 'package:app/screens/creaturePage/selece_device.dart';
+import 'package:app/screens/statisticsPage/selece_device_stat.dart';
 import 'package:flutter/material.dart';
 import 'devicePage/device_page.dart';
 import 'home/home_page.dart';
 import 'profilePage/profile_page.dart';
-import 'statisticsPage/statistics_page.dart';
 
 class TabPage extends StatefulWidget {
   const TabPage({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _TabPageState extends State<TabPage> {
     DevicesPage(),
     SelectDevicePage(),
     HomePage(),
-    StatisticsPage(),
+    SelectDeviceStatPage(),
     ProfilePage(),
   ];
 
