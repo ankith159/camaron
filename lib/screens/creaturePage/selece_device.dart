@@ -118,6 +118,7 @@ class ManageDeviceCard extends StatelessWidget {
         );
       },
       child: Container(
+        margin: EdgeInsets.only(bottom: 20),
         child: Text(
           "$name",
           style: GoogleFonts.roboto(
