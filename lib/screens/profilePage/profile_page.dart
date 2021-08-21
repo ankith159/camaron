@@ -2,9 +2,9 @@ import 'package:app/screens/appDrawer/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:url_launcher/url_launcher.dart';
 
 import 'ask_a_demo.dart';
-import 'book_a_service.dart';
 import 'edit_profile.dart';
 import 'settings_page.dart';
 import 'support_page.dart';
@@ -30,6 +30,20 @@ class _ProfilePageState extends State<ProfilePage> {
               fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold),
           textScaleFactor: 1,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditProfile(),
+                ),
+              );
+            },
+            icon: Icon(Icons.edit),
+            color: Colors.black,
+          ),
+        ],
       ),
       body: ListView(
         children: <Widget>[
@@ -50,18 +64,42 @@ class _ProfilePageState extends State<ProfilePage> {
               Container(
                 height: 130,
                 width: 130,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 18, top: 50),
-                  child: CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Colors.white,
-                    child: ClipOval(
-                      child: Icon(
-                        Icons.person,
-                        size: 60,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 18, top: 50),
+                      child: CircleAvatar(
+                        radius: 55,
+                        backgroundColor: Colors.white,
+                        child: ClipOval(
+                          child: _auth.currentUser!.photoURL != null
+                              ? Image.network(_auth.currentUser!.photoURL!)
+                              : Icon(
+                                  Icons.person,
+                                  size: 60,
+                                ),
+                        ),
                       ),
                     ),
-                  ),
+                    // Align(
+                    //   alignment: Alignment.topRight,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(top: 50, right: 15),
+                    //     child: IconButton(
+                    //       onPressed: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) => EditProfile(),
+                    //           ),
+                    //         );
+                    //       },
+                    //       icon: Icon(Icons.edit),
+                    //       color: Colors.black,
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
                 ),
               ),
               Expanded(
@@ -107,32 +145,37 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditProfile(),
-                      ),
-                    );
-                  },
-                  icon: Icon(Icons.edit),
-                  color: Colors.black,
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 40.0),
+              //   child: IconButton(
+              //     onPressed: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => EditProfile(),
+              //         ),
+              //       );
+              //     },
+              //     icon: Icon(Icons.edit),
+              //     color: Colors.black,
+              //   ),
+              // ),
             ],
           ),
           SizedBox(height: 70),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookAServicePage(),
-                ),
-              );
+            onTap: () async {
+              //  var url = "${baseURL}91${msg['phone']}&text=${msg['messages']}";
+              // print(url);
+              // AndroidIntent intent = AndroidIntent(
+              //     action: 'action_view',
+              //     data: Uri.encodeFull(url),
+              //    package: "com.whatsapp.w4b");
+              // intent.launch();
+              await canLaunch('https://google.com')
+                  ? await launch('https://google.com')
+                  : throw 'Could not launch ${'https://google.com'}';
+              // launch('https://google.com');
             },
             child: Container(
               child: Text(

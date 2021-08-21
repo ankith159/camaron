@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">664743184712-1gj5iiid8nkdiedqv2l4i5j3kthr0upa.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://cameron-2d49a-default-rtdb.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">664743184712</string>
+    <string name="google_api_key" translatable="false">AIzaSyCukhbltZRe41mmzyGNaMSgn8zRAvCCxks</string>
+    <string name="google_app_id" translatable="false">1:664743184712:android:1d4c8e892770343e2a4b7d</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCukhbltZRe41mmzyGNaMSgn8zRAvCCxks</string>
+    <string name="google_storage_bucket" translatable="false">cameron-2d49a.appspot.com</string>
+    <string name="project_id" translatable="false">cameron-2d49a</string>
+</resources>

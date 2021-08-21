@@ -15,7 +15,6 @@ class DeviceOnePage extends StatefulWidget {
 class _DeviceOnePageState extends State<DeviceOnePage> {
   bool _switchValue = true;
   DataSnapshot? data;
-  bool _refresh = false;
   @override
   initState() {
     super.initState();

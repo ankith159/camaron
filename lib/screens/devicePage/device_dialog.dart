@@ -15,7 +15,6 @@ class DeviceDialog extends StatefulWidget {
 class _DeviceDialogState extends State<DeviceDialog> {
   bool _switchValue = true;
   DataSnapshot? data;
-  bool _refresh = false;
   @override
   initState() {
     super.initState();

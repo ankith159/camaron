@@ -1,6 +1,5 @@
 import 'package:app/screens/creaturePage/selece_device.dart';
 import 'package:flutter/material.dart';
-import 'creaturePage/creatures_page.dart';
 import 'devicePage/device_page.dart';
 import 'home/home_page.dart';
 import 'profilePage/profile_page.dart';

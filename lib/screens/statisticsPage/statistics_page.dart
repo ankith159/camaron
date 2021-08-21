@@ -1,14 +1,9 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:app/screens/appDrawer/app_drawer.dart';
 import 'package:app/static_data.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:high_chart/high_chart.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 
 class StatisticsPage extends StatefulWidget {
   const StatisticsPage({Key? key}) : super(key: key);

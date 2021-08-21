@@ -1,4 +1,3 @@
-import 'package:app/screens/creaturePage/creatures_page.dart';
 import 'package:app/screens/creaturePage/selece_device.dart';
 import 'package:app/screens/devicePage/device_page.dart';
 import 'package:app/screens/profilePage/ask_a_demo.dart';
