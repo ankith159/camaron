@@ -57,6 +57,7 @@ class _DeviceDialogState extends State<DeviceDialog> {
               return Center(
                 child: Text('No data Found'),
               );
+              Map map = snapshot.data!.snapshot.value;
 
             return Center(
               child: InkWell(
@@ -83,113 +84,110 @@ class _DeviceDialogState extends State<DeviceDialog> {
                           ),
                         ),
                         SizedBox(height: 15),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 18, right: 20, left: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'pH Value',
-                                style: GoogleFonts.ptSans(
-                                  fontSize: 20,
-                                  color: Colors.black87,
+                        map.containsKey('pH')? Padding(
+                      padding:
+                          const EdgeInsets.only(top: 18, right: 20, left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'pH Value',
+                            style: GoogleFonts.ptSans(
+                              fontSize: 20,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Text(
+                            snapshot.data!.snapshot.value['pH']
+                                .toStringAsFixed(3),
+                            style: GoogleFonts.ptSans(
+                              fontSize: 20,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ):Container(),
+                    map.containsKey('pH')?Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 10, right: 20, left: 20, top: 10),
+                      child: Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ):Container(),
+                        map.containsKey('Dissolved Oxygen')? Padding(
+                      padding:
+                          const EdgeInsets.only(top: 8, right: 20, left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Dissolved Oxygen levels',
+                            style: GoogleFonts.ptSans(
+                              fontSize: 20,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          data == null
+                              ? Container()
+                              : Text(
+                                  snapshot
+                                      .data!.snapshot.value['Dissolved Oxygen']
+                                      .toStringAsFixed(3),
+                                  style: GoogleFonts.ptSans(
+                                    fontSize: 20,
+                                    color: Colors.orange,
+                                  ),
                                 ),
-                              ),
-                              data == null
-                                  ? Container()
-                                  : Text(
-                                      snapshot.data!.snapshot.value['pH']
-                                          .toStringAsFixed(3),
-                                      style: GoogleFonts.ptSans(
-                                        fontSize: 20,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                            ],
+                        ],
+                      ),
+                    ):Container(),
+                    map.containsKey('Dissolved Oxygen')?Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 10, right: 20, left: 20, top: 10),
+                      child: Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ):Container(),
+                        map.containsKey('Temperature')?Padding(
+                      padding:
+                          const EdgeInsets.only(top: 8, right: 20, left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Temperature',
+                            style: GoogleFonts.ptSans(
+                              fontSize: 20,
+                              color: Colors.black87,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 10, right: 20, left: 20, top: 10),
-                          child: Divider(
-                            height: 1,
-                            thickness: 1,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, right: 20, left: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Dissolved Oxygen levels',
-                                style: GoogleFonts.ptSans(
-                                  fontSize: 20,
-                                  color: Colors.black87,
+                          data == null
+                              ? Container()
+                              : Text(
+                                  snapshot.data!.snapshot.value['Temperature']
+                                      .toStringAsFixed(3),
+                                  style: GoogleFonts.ptSans(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                  ),
                                 ),
-                              ),
-                              data == null
-                                  ? Container()
-                                  : Text(
-                                      snapshot.data!.snapshot
-                                          .value['Dissolved Oxygen']
-                                          .toStringAsFixed(3),
-                                      style: GoogleFonts.ptSans(
-                                        fontSize: 20,
-                                        color: Colors.orange,
-                                      ),
-                                    ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 10, right: 20, left: 20, top: 10),
-                          child: Divider(
-                            height: 1,
-                            thickness: 1,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, right: 20, left: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Temperature',
-                                style: GoogleFonts.ptSans(
-                                  fontSize: 20,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              data == null
-                                  ? Container()
-                                  : Text(
-                                      snapshot
-                                          .data!.snapshot.value['Temperature']
-                                          .toStringAsFixed(3),
-                                      style: GoogleFonts.ptSans(
-                                        fontSize: 20,
-                                        color: Colors.green,
-                                      ),
-                                    ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 10, right: 20, left: 20, top: 10),
-                          child: Divider(
-                            height: 1,
-                            thickness: 1,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
+                        ],
+                      ),
+                    ):Container(),
+                    map.containsKey('Temperature')?Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 10, right: 20, left: 20, top: 10),
+                      child: Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ):Container(),
                         SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),

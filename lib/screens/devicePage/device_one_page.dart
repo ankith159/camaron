@@ -66,6 +66,7 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
               return Center(
                 child: Text('No data Found'),
               );
+              Map map = snapshot.data!.snapshot.value;
 
             return SafeArea(
               child: Container(
@@ -88,7 +89,7 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                       ),
                     ),
                     SizedBox(height: 15),
-                    Padding(
+                    map.containsKey('pH')? Padding(
                       padding:
                           const EdgeInsets.only(top: 18, right: 20, left: 20),
                       child: Row(
@@ -111,8 +112,8 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                           ),
                         ],
                       ),
-                    ),
-                    Padding(
+                    ):Container(),
+                    map.containsKey('pH')?Padding(
                       padding: const EdgeInsets.only(
                           bottom: 10, right: 20, left: 20, top: 10),
                       child: Divider(
@@ -120,8 +121,8 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                         thickness: 1,
                         color: Theme.of(context).primaryColor,
                       ),
-                    ),
-                    Padding(
+                    ):Container(),
+                    map.containsKey('Dissolved Oxygen')? Padding(
                       padding:
                           const EdgeInsets.only(top: 8, right: 20, left: 20),
                       child: Row(
@@ -147,8 +148,8 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                                 ),
                         ],
                       ),
-                    ),
-                    Padding(
+                    ):Container(),
+                    map.containsKey('Dissolved Oxygen')?Padding(
                       padding: const EdgeInsets.only(
                           bottom: 10, right: 20, left: 20, top: 10),
                       child: Divider(
@@ -156,8 +157,8 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                         thickness: 1,
                         color: Theme.of(context).primaryColor,
                       ),
-                    ),
-                    Padding(
+                    ):Container(),
+                    map.containsKey('Temperature')?Padding(
                       padding:
                           const EdgeInsets.only(top: 8, right: 20, left: 20),
                       child: Row(
@@ -182,8 +183,8 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                                 ),
                         ],
                       ),
-                    ),
-                    Padding(
+                    ):Container(),
+                    map.containsKey('Temperature')?Padding(
                       padding: const EdgeInsets.only(
                           bottom: 10, right: 20, left: 20, top: 10),
                       child: Divider(
@@ -191,7 +192,7 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                         thickness: 1,
                         color: Theme.of(context).primaryColor,
                       ),
-                    ),
+                    ):Container(),
                     SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.only(right: 20, left: 20),
