@@ -1,7 +1,11 @@
+// import 'dart:html' as html;
+// import 'dart:io';
+
 import 'package:app/screens/appDrawer/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+// import 'package:open_whatsapp/open_whatsapp.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'ask_a_demo.dart';
@@ -175,7 +179,11 @@ class _ProfilePageState extends State<ProfilePage> {
               await canLaunch('https://google.com')
                   ? await launch('https://google.com')
                   : throw 'Could not launch ${'https://google.com'}';
-              // launch('https://google.com');
+              launch('https://google.com');
+
+              // openwhatsapp();
+              // FlutterOpenWhatsapp.sendSingleMessage("919502988820", "Hello");
+              // html.window.open("https://google.com", "_blank");
             },
             child: Container(
               child: Text(

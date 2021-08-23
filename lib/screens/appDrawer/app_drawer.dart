@@ -40,10 +40,10 @@ class AppDrawer extends StatelessWidget {
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: ClipOval(
-                  child: SvgPicture.asset(
-                    'assets/s2.svg',
+                  child: Image.asset(
+                    'assets/user.png',
                     width: 200,
-                    height: 200,
+                    height: 150,
                     color: Colors.teal[200],
                   ),
                 ),
@@ -53,10 +53,10 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: SvgPicture.asset(
-                'assets/device.png',
-                width: 28,
-                height: 28,
+              leading: Icon(
+                Icons.device_hub,
+                size: 28,
+                color: Colors.black,
               ),
               title: Text(
                 'Devices',
@@ -74,10 +74,10 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: SvgPicture.asset(
-                'assets/stats.png',
-                width: 28,
-                height: 28,
+              leading: Icon(
+                Icons.graphic_eq,
+                size: 28,
+                color: Colors.black,
               ),
               title: Text(
                 'Statistics',
@@ -95,8 +95,8 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: SvgPicture.asset(
-                'assets/fish.png',
+              leading: Image.asset(
+                'assets/fishicon.png',
                 width: 28,
                 height: 28,
                 color: Colors.black,
@@ -122,7 +122,11 @@ class AppDrawer extends StatelessWidget {
               //   width: 28,
               //   height: 28,
               // ),
-              leading: Icon(Icons.calculate),
+              leading: Icon(
+                Icons.calculate,
+                size: 28,
+                color: Colors.black,
+              ),
               title: Text(
                 'Feed Calculator',
                 style: GoogleFonts.roboto(
@@ -139,10 +143,10 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: SvgPicture.asset(
-                'assets/icons/booking.svg',
-                width: 28,
-                height: 28,
+              leading: Icon(
+                Icons.book_online,
+                size: 28,
+                color: Colors.black,
               ),
               title: Text(
                 'Book a service',
@@ -160,10 +164,9 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: SvgPicture.asset(
-                'assets/icons/demo.svg',
-                width: 28,
-                height: 28,
+              leading: Icon(
+                Icons.help,
+                size: 28,
                 color: Colors.black,
               ),
               title: Text(
@@ -182,10 +185,10 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: SvgPicture.asset(
-                'assets/icons/support.svg',
-                width: 28,
-                height: 28,
+              leading: Icon(
+                Icons.support,
+                size: 28,
+                color: Colors.black,
               ),
               title: Text(
                 'Support',
@@ -203,10 +206,10 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: SvgPicture.asset(
-                'assets/icons/settings.svg',
-                width: 28,
-                height: 28,
+              leading: Icon(
+                Icons.settings,
+                size: 28,
+                color: Colors.black,
               ),
               title: Text(
                 'Settings',
