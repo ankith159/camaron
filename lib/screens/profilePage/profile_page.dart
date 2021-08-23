@@ -281,7 +281,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             child: Container(
               child: Text(
-                "Setting",
+                "Settings",
                 style: GoogleFonts.roboto(
                   fontSize: 16,
                   color: Colors.black,
