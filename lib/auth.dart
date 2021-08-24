@@ -1,13 +1,13 @@
-import 'package:auth/auth.dart';
-import 'package:auth/models/codeSent.dart';
+import 'package:app/user.dart';
+import 'codeSent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  // final GoogleSignIn _googleSignIn = GoogleSignIn();
   static auth.User? authUser;
 
   LoginUser? _userFromFirebaseUser(auth.User? user) {
@@ -81,34 +81,34 @@ class AuthService {
   }
 
   //Sign in with google auth
-  Future googleSignIn() async {
-    final googleUser = await _googleSignIn.signIn();
-    final googleAuth = await googleUser!.authentication;
-    final auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    final user = await _auth.signInWithCredential(credential);
-    await createUserDoc(user);
+  // Future googleSignIn() async {
+  //   final googleUser = await _googleSignIn.signIn();
+  //   final googleAuth = await googleUser!.authentication;
+  //   final auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
+  //     accessToken: googleAuth.accessToken,
+  //     idToken: googleAuth.idToken,
+  //   );
+  //   final user = await _auth.signInWithCredential(credential);
+  //   await createUserDoc(user);
 
-    return _userFromFirebaseUser(user.user);
-  }
+  //   return _userFromFirebaseUser(user.user);
+  // }
 
-  Future<auth.UserCredential> signInWithFacebook() async {
-    // Trigger the sign-in flow
-    final LoginResult result = await FacebookAuth.instance.login();
+  // Future<auth.UserCredential> signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult result = await FacebookAuth.instance.login();
 
-    // Create a credential from the access token
-    final facebookAuthCredential =
-        auth.FacebookAuthProvider.credential(result.accessToken!.token);
+  //   // Create a credential from the access token
+  //   final facebookAuthCredential =
+  //       auth.FacebookAuthProvider.credential(result.accessToken!.token);
 
-    // Once signed in, return the UserCredential
-    final user = await _auth.signInWithCredential(facebookAuthCredential);
+  //   // Once signed in, return the UserCredential
+  //   final user = await _auth.signInWithCredential(facebookAuthCredential);
 
-    createUserDoc(user);
+  //   createUserDoc(user);
 
-    return user;
-  }
+  //   return user;
+  // }
 
   //Register with email and password
   registerEmailPass(email, password) async {

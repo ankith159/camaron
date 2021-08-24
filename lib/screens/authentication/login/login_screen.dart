@@ -1,5 +1,5 @@
+import 'package:app/auth.dart';
 import 'package:app/screens/authentication/signup/signup_form.dart';
-import 'package:auth/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

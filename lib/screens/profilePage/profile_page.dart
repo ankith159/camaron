@@ -17,6 +17,10 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  void launchWhatsapp({@required number, @required message}) async {
+    String url = "whatsapp://send?phone=+919493757509&text=$message";
+    await canLaunch(url) ? launch(url) : print("can't open whatsapp");
+  }
   var _auth = auth.FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -172,9 +176,9 @@ class _ProfilePageState extends State<ProfilePage> {
               //     data: Uri.encodeFull(url),
               //    package: "com.whatsapp.w4b");
               // intent.launch();
-              await canLaunch('https://google.com')
-                  ? await launch('https://google.com')
-                  : throw 'Could not launch ${'https://google.com'}';
+
+              String url = "whatsapp://send?phone=+919493757509&text=hi";
+              await canLaunch(url) ? launch(url) : print("can't open whatsapp");
               // launch('https://google.com');
             },
             child: Container(
@@ -203,13 +207,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           SizedBox(height: 10),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AskADemoPage(),
-                ),
-              );
+            onTap: () async{
+              String url = "whatsapp://send?phone=+919493757509&text=hi";
+              await canLaunch(url) ? launch(url) : print("can't open whatsapp");
             },
             child: Container(
               child: Text(
@@ -237,13 +237,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           SizedBox(height: 10),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SupportPage(),
-                ),
-              );
+            onTap: () async{
+              launchWhatsapp(number: "+919493757509", message: "hey ankith");
             },
             child: Container(
               child: Text(
