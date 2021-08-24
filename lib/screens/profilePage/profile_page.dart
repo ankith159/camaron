@@ -1,7 +1,11 @@
+// import 'dart:html' as html;
+// import 'dart:io';
+
 import 'package:app/screens/appDrawer/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+// import 'package:open_whatsapp/open_whatsapp.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'ask_a_demo.dart';
