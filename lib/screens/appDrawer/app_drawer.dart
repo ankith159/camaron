@@ -7,7 +7,6 @@ import 'package:app/screens/profilePage/support_page.dart';
 import 'package:app/screens/statisticsPage/selece_device_stat.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'feed_calculator_page.dart';

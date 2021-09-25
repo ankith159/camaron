@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class StatisticsPage extends StatefulWidget {
   final String name;
@@ -14,6 +15,7 @@ class StatisticsPage extends StatefulWidget {
 }
 
 class _StatisticsPageState extends State<StatisticsPage> {
+  @override
   initState() {
     super.initState();
     var ref = database.reference().child('devices').child(widget.name);
@@ -26,21 +28,67 @@ class _StatisticsPageState extends State<StatisticsPage> {
     Map keys = data.value;
     graphs = keys;
     temp.removeAt(0);
+    tempX.removeAt(0);
     ph.removeAt(0);
+    phX.removeAt(0);
     oxy.removeAt(0);
+    oxyX.removeAt(0);
     setState(() {
       Map keys = data.value;
-      if (keys.containsKey('Temperature'))
+      if (keys.containsKey('Temperature')) {
         temp.add(event.snapshot.value['Temperature']);
-      if (keys.containsKey('pH')) ph.add(event.snapshot.value['pH']);
-      if (keys.containsKey('Dissolved Oxygen'))
+        tempX.add(DateTime.now());
+      }
+      if (keys.containsKey('pH')) {
+        ph.add(event.snapshot.value['pH']);
+        phX.add(DateTime.now());
+      }
+      if (keys.containsKey('Dissolved Oxygen')) {
         oxy.add(event.snapshot.value['Dissolved Oxygen']);
+        oxyX.add(DateTime.now());
+      }
     });
   }
 
   List<dynamic> temp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   List<dynamic> ph = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   List<dynamic> oxy = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  List<dynamic> tempX = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ];
+  List<dynamic> phX = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ];
+  List<dynamic> oxyX = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ];
   final FirebaseDatabase database = FirebaseDatabase(app: StaticData.app);
   List<TimeSeriesSales> dat = [];
 
@@ -55,6 +103,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
   //   // print(data[9]!.value['Temperature']);
   //   return doc;
   // }
+  final DateFormat formatter = DateFormat('Hms');
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +152,8 @@ class _StatisticsPageState extends State<StatisticsPage> {
                           ),
                           Flexible(
                             child: Container(
-                              height: 200,
+                              height: 220,
+                              padding: EdgeInsets.only(bottom: 15),
                               margin:
                                   EdgeInsets.only(top: 5, right: 20, left: 20),
                               decoration: BoxDecoration(
@@ -135,26 +185,36 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                                 strokeWidth: 1);
                                           }),
                                       titlesData: FlTitlesData(
-                                        leftTitles: SideTitles(
-                                          showTitles: true,
-                                          reservedSize: 22,
-                                          getTextStyles: (value) =>
-                                              const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
+                                          leftTitles: SideTitles(
+                                            showTitles: true,
+                                            reservedSize: 22,
+                                            getTextStyles: (value) =>
+                                                const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                            ),
+                                            margin: 10,
+                                            getTitles: (value) {
+                                              if (value.toInt() % 10 == 0) {
+                                                return '${value.toInt()}';
+                                              } else {
+                                                return '';
+                                              }
+                                            },
                                           ),
-                                          margin: 10,
-                                          getTitles: (value) {
-                                            if (value.toInt() % 10 == 0) {
-                                              return '${value.toInt()}';
-                                            } else {
-                                              return '';
-                                            }
-                                          },
-                                        ),
-                                      ),
+                                          bottomTitles: SideTitles(
+                                              rotateAngle: 300,
+                                              showTitles: true,
+                                              getTitles: (value) {
+                                                if (tempX[value.toInt()] ==
+                                                    null)
+                                                  return '';
+                                                else
+                                                  return formatter.format(
+                                                      tempX[value.toInt()]);
+                                              })),
                                       minX: 0,
-                                      maxX: 10,
+                                      maxX: 9,
                                       maxY: 50,
                                       minY: 0,
                                       lineBarsData: [
@@ -192,7 +252,8 @@ class _StatisticsPageState extends State<StatisticsPage> {
                           ),
                           Flexible(
                             child: Container(
-                              height: 200,
+                              height: 220,
+                              padding: EdgeInsets.only(bottom: 15),
                               margin:
                                   EdgeInsets.only(top: 5, right: 20, left: 20),
                               decoration: BoxDecoration(
@@ -224,26 +285,35 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                                 strokeWidth: 1);
                                           }),
                                       titlesData: FlTitlesData(
-                                        leftTitles: SideTitles(
-                                          showTitles: true,
-                                          reservedSize: 22,
-                                          getTextStyles: (value) =>
-                                              const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
+                                          leftTitles: SideTitles(
+                                            showTitles: true,
+                                            reservedSize: 22,
+                                            getTextStyles: (value) =>
+                                                const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                            ),
+                                            margin: 10,
+                                            getTitles: (value) {
+                                              if (value.toInt() % 2 == 0) {
+                                                return '${value.toInt()}';
+                                              } else {
+                                                return '';
+                                              }
+                                            },
                                           ),
-                                          margin: 10,
-                                          getTitles: (value) {
-                                            if (value.toInt() % 2 == 0) {
-                                              return '${value.toInt()}';
-                                            } else {
-                                              return '';
-                                            }
-                                          },
-                                        ),
-                                      ),
+                                          bottomTitles: SideTitles(
+                                              rotateAngle: 300,
+                                              showTitles: true,
+                                              getTitles: (value) {
+                                                if (phX[value.toInt()] == null)
+                                                  return '';
+                                                else
+                                                  return formatter.format(
+                                                      phX[value.toInt()]);
+                                              })),
                                       minX: 0,
-                                      maxX: 10,
+                                      maxX: 9,
                                       maxY: 14,
                                       minY: 0,
                                       lineBarsData: [
@@ -281,7 +351,8 @@ class _StatisticsPageState extends State<StatisticsPage> {
                           ),
                           Flexible(
                             child: Container(
-                              height: 200,
+                              height: 220,
+                              padding: EdgeInsets.only(bottom: 15),
                               margin:
                                   EdgeInsets.only(top: 5, right: 20, left: 20),
                               decoration: BoxDecoration(
@@ -314,26 +385,35 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                         },
                                       ),
                                       titlesData: FlTitlesData(
-                                        leftTitles: SideTitles(
-                                          showTitles: true,
-                                          reservedSize: 22,
-                                          getTextStyles: (value) =>
-                                              const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
+                                          leftTitles: SideTitles(
+                                            showTitles: true,
+                                            reservedSize: 22,
+                                            getTextStyles: (value) =>
+                                                const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                            ),
+                                            margin: 10,
+                                            getTitles: (value) {
+                                              if (value.toInt() % 20 == 0) {
+                                                return '${value.toInt()}';
+                                              } else {
+                                                return '';
+                                              }
+                                            },
                                           ),
-                                          margin: 10,
-                                          getTitles: (value) {
-                                            if (value.toInt() % 20 == 0) {
-                                              return '${value.toInt()}';
-                                            } else {
-                                              return '';
-                                            }
-                                          },
-                                        ),
-                                      ),
+                                          bottomTitles: SideTitles(
+                                              rotateAngle: 300,
+                                              showTitles: true,
+                                              getTitles: (value) {
+                                                if (oxyX[value.toInt()] == null)
+                                                  return '';
+                                                else
+                                                  return formatter.format(
+                                                      oxyX[value.toInt()]);
+                                              })),
                                       minX: 0,
-                                      maxX: 10,
+                                      maxX: 9,
                                       maxY: 180,
                                       minY: 0,
                                       lineBarsData: [

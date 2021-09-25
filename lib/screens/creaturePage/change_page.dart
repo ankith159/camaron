@@ -475,11 +475,13 @@ class _ChangePageState extends State<ChangePage> {
               ),
             ),
             SizedBox(
-              height: 75,
+              height: 50,
             ),
             Center(
                 child: ElevatedButton(
                     onPressed: () async {
+                      if(type == 'Type')
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Select the type')));
                       var data = type == 'Fishes'
                           ? fishes
                           : type == 'Prawns'
@@ -487,10 +489,12 @@ class _ChangePageState extends State<ChangePage> {
                               : type == 'Clams'
                                   ? clams
                                   : oyesters;
+                      if(data!='subtype')
                       await FirebaseFirestore.instance
                           .collection('devices')
                           .doc(widget.id)
                           .update({'creature': data});
+                      if(type != 'Type')
                       Navigator.pop(context);
                     },
                     child: Text('Select'))),

@@ -1,17 +1,10 @@
-// import 'dart:html' as html;
-// import 'dart:io';
-
 import 'package:app/screens/appDrawer/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-// import 'package:open_whatsapp/open_whatsapp.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'ask_a_demo.dart';
 import 'edit_profile.dart';
 import 'settings_page.dart';
-import 'support_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -25,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
     String url = "whatsapp://send?phone=+919493757509&text=$message";
     await canLaunch(url) ? launch(url) : print("can't open whatsapp");
   }
+
   var _auth = auth.FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -171,78 +165,113 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           SizedBox(height: 70),
+          // GestureDetector(
+          //   onTap: () async {
+          //     //  var url = "${baseURL}91${msg['phone']}&text=${msg['messages']}";
+          //     // print(url);
+          //     // AndroidIntent intent = AndroidIntent(
+          //     //     action: 'action_view',
+          //     //     data: Uri.encodeFull(url),
+          //     //    package: "com.whatsapp.w4b");
+          //     // intent.launch();
+
+          //     String url = "whatsapp://send?phone=+919493757509&text=hi";
+          //     await canLaunch(url) ? launch(url) : print("can't open whatsapp");
+          //     // launch('https://google.com');
+          //   },
+          //   child: Container(
+          //     child: Text(
+          //       "Book A Service",
+          //       style: GoogleFonts.roboto(
+          //         fontSize: 16,
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //     width: double.maxFinite,
+          //     padding: EdgeInsets.only(top: 18, bottom: 18),
+          //     decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: AssetImage(
+          //             "assets/next.png",
+          //           ),
+          //           alignment: Alignment.topRight,
+          //           fit: BoxFit.contain,
+          //         ),
+          //         // color: Theme.of(context).primaryColor,
+          //         border: Border(
+          //             bottom:
+          //                 BorderSide(color: Theme.of(context).primaryColor))),
+          //   ),
+          // ),
+          // SizedBox(height: 10),
+          // GestureDetector(
+          //   onTap: () async {
+          //     String url = "whatsapp://send?phone=+919493757509&text=hi";
+          //     await canLaunch(url) ? launch(url) : print("can't open whatsapp");
+          //   },
+          //   child: Container(
+          //     child: Text(
+          //       "Ask A Demo",
+          //       style: GoogleFonts.roboto(
+          //         fontSize: 16,
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //     width: double.maxFinite,
+          //     padding: EdgeInsets.only(top: 18, bottom: 18),
+          //     decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: AssetImage(
+          //             "assets/next.png",
+          //           ),
+          //           alignment: Alignment.topRight,
+          //           fit: BoxFit.contain,
+          //         ),
+          //         // color: Theme.of(context).primaryColor,
+          //         border: Border(
+          //             bottom:
+          //                 BorderSide(color: Theme.of(context).primaryColor))),
+          //   ),
+          // ),
+          SizedBox(height: 10),
           GestureDetector(
             onTap: () async {
-              //  var url = "${baseURL}91${msg['phone']}&text=${msg['messages']}";
-              // print(url);
-              // AndroidIntent intent = AndroidIntent(
-              //     action: 'action_view',
-              //     data: Uri.encodeFull(url),
-              //    package: "com.whatsapp.w4b");
-              // intent.launch();
-
-              String url = "whatsapp://send?phone=+919493757509&text=hi";
-              await canLaunch(url) ? launch(url) : print("can't open whatsapp");
-              // launch('https://google.com');
-            },
-            child: Container(
-              child: Text(
-                "Book A Service",
-                style: GoogleFonts.roboto(
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
-              ),
-              width: double.maxFinite,
-              padding: EdgeInsets.only(top: 18, bottom: 18),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      "assets/next.png",
-                    ),
-                    alignment: Alignment.topRight,
-                    fit: BoxFit.contain,
-                  ),
-                  // color: Theme.of(context).primaryColor,
-                  border: Border(
-                      bottom:
-                          BorderSide(color: Theme.of(context).primaryColor))),
-            ),
-          ),
-          SizedBox(height: 10),
-          GestureDetector(
-            onTap: () async{
-              String url = "whatsapp://send?phone=+919493757509&text=hi";
-              await canLaunch(url) ? launch(url) : print("can't open whatsapp");
-            },
-            child: Container(
-              child: Text(
-                "Ask A Demo",
-                style: GoogleFonts.roboto(
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
-              ),
-              width: double.maxFinite,
-              padding: EdgeInsets.only(top: 18, bottom: 18),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      "assets/next.png",
-                    ),
-                    alignment: Alignment.topRight,
-                    fit: BoxFit.contain,
-                  ),
-                  // color: Theme.of(context).primaryColor,
-                  border: Border(
-                      bottom:
-                          BorderSide(color: Theme.of(context).primaryColor))),
-            ),
-          ),
-          SizedBox(height: 10),
-          GestureDetector(
-            onTap: () async{
-              launchWhatsapp(number: "+919493757509", message: "hey ankith");
+              // launchWhatsapp(number: "+919493757509", message: "hey ankith");
+              showBottomSheet(
+                  context: context,
+                  builder: (context) => Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30)),
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                launchWhatsapp(
+                                    number: "+919493757509",
+                                    message: "hey ankith");
+                              },
+                              icon: Icon(
+                                Icons.share,
+                                size: 30,
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  launch('mailto:rajatrrpalankar@gmail.com');
+                                },
+                                icon: Icon(
+                                  Icons.mail,
+                                  size: 30,
+                                )),
+                          ],
+                        ),
+                      ));
             },
             child: Container(
               child: Text(
