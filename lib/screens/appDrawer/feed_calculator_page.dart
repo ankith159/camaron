@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'aeration_calculator.dart';
+import 'feeding_calculator.dart';
+import 'fish_feed_calculator.dart';
+import 'pond_calculator.dart';
+import 'shrimp_converter.dart';
+
 class FeedCalculatorPage extends StatefulWidget {
   const FeedCalculatorPage({Key? key}) : super(key: key);
 
@@ -25,6 +31,45 @@ class _FeedCalculatorPageState extends State<FeedCalculatorPage> {
             textScaleFactor: 1,
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          ListTile(
+            title: Text('Fish Feed Calculator'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => FishFeedCal()));
+            },
+          ),
+          ListTile(
+            title: Text('Feeding Calculator'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => FeedingCal()));
+            },
+          ),
+          ListTile(
+            title: Text('Aeration Calculator'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AerationCal()));
+            },
+          ),
+          ListTile(
+            title: Text('Pond Calculator'),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => PondCal()));
+            },
+          ),
+          ListTile(
+            title: Text('Shrimp Converter'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ShrimpConverter()));
+            },
+          ),
+        ],
       ),
     );
   }

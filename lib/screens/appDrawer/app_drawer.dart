@@ -1,9 +1,6 @@
 import 'package:app/screens/creaturePage/selece_device.dart';
 import 'package:app/screens/devicePage/device_page.dart';
-import 'package:app/screens/profilePage/ask_a_demo.dart';
-import 'package:app/screens/profilePage/book_a_service.dart';
 import 'package:app/screens/profilePage/settings_page.dart';
-import 'package:app/screens/profilePage/support_page.dart';
 import 'package:app/screens/statisticsPage/selece_device_stat.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
@@ -141,48 +138,48 @@ class AppDrawer extends StatelessWidget {
                     ));
               },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.book_online,
-                size: 28,
-                color: Colors.black,
-              ),
-              title: Text(
-                'Book a service',
-                style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BookAServicePage(),
-                    ));
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.help,
-                size: 28,
-                color: Colors.black,
-              ),
-              title: Text(
-                'Ask for a demo',
-                style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AskADemoPage(),
-                    ));
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(
+            //     Icons.book_online,
+            //     size: 28,
+            //     color: Colors.black,
+            //   ),
+            //   title: Text(
+            //     'Book a service',
+            //     style: GoogleFonts.roboto(
+            //       fontSize: 18,
+            //       color: Colors.black,
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => BookAServicePage(),
+            //         ));
+            //   },
+            // ),
+            // ListTile(
+            //   leading: Icon(
+            //     Icons.help,
+            //     size: 28,
+            //     color: Colors.black,
+            //   ),
+            //   title: Text(
+            //     'Ask for a demo',
+            //     style: GoogleFonts.roboto(
+            //       fontSize: 18,
+            //       color: Colors.black,
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => AskADemoPage(),
+            //         ));
+            //   },
+            // ),
             ListTile(
               leading: Icon(
                 Icons.support,
@@ -197,11 +194,7 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SupportPage(),
-                    ));
+                //TODO
               },
             ),
             ListTile(
