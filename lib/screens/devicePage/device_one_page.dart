@@ -1,4 +1,5 @@
 import 'package:app/static_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
               return Center(
                 child: Text('No data Found'),
               );
-              Map map = snapshot.data!.snapshot.value;
+            Map map = snapshot.data!.snapshot.value;
 
             return SafeArea(
               child: Container(
@@ -89,133 +90,252 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                       ),
                     ),
                     SizedBox(height: 15),
-                    map.containsKey('pH')? Padding(
-                      padding:
-                          const EdgeInsets.only(top: 18, right: 20, left: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'pH Value',
-                            style: GoogleFonts.ptSans(
-                              fontSize: 20,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          Text(
-                            snapshot.data!.snapshot.value['pH']
-                                .toStringAsFixed(3),
-                            style: GoogleFonts.ptSans(
-                              fontSize: 20,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ):Container(),
-                    map.containsKey('pH')?Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 10, right: 20, left: 20, top: 10),
-                      child: Divider(
-                        height: 1,
-                        thickness: 1,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ):Container(),
-                    map.containsKey('Dissolved Oxygen')? Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8, right: 20, left: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Dissolved Oxygen levels',
-                            style: GoogleFonts.ptSans(
-                              fontSize: 20,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          data == null
-                              ? Container()
-                              : Text(
-                                  snapshot
-                                      .data!.snapshot.value['Dissolved Oxygen']
+                    map.containsKey('pH')
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                top: 18, right: 20, left: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'pH Value',
+                                  style: GoogleFonts.ptSans(
+                                    fontSize: 20,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  snapshot.data!.snapshot.value['pH']
                                       .toStringAsFixed(3),
                                   style: GoogleFonts.ptSans(
                                     fontSize: 20,
-                                    color: Colors.orange,
+                                    color: Colors.red,
                                   ),
                                 ),
-                        ],
-                      ),
-                    ):Container(),
-                    map.containsKey('Dissolved Oxygen')?Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 10, right: 20, left: 20, top: 10),
-                      child: Divider(
-                        height: 1,
-                        thickness: 1,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ):Container(),
-                    map.containsKey('Temperature')?Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8, right: 20, left: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Temperature',
-                            style: GoogleFonts.ptSans(
-                              fontSize: 20,
-                              color: Colors.black87,
+                              ],
                             ),
-                          ),
-                          data == null
-                              ? Container()
-                              : Text(
-                                  snapshot.data!.snapshot.value['Temperature']
-                                      .toStringAsFixed(3),
+                          )
+                        : Container(),
+                    map.containsKey('pH')
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 10, right: 20, left: 20, top: 10),
+                            child: Divider(
+                              height: 1,
+                              thickness: 1,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          )
+                        : Container(),
+                    map.containsKey('Dissolved Oxygen')
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                top: 8, right: 20, left: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Dissolved Oxygen levels',
                                   style: GoogleFonts.ptSans(
                                     fontSize: 20,
-                                    color: Colors.green,
+                                    color: Colors.black87,
                                   ),
                                 ),
-                        ],
-                      ),
-                    ):Container(),
-                    map.containsKey('Temperature')?Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 10, right: 20, left: 20, top: 10),
-                      child: Divider(
-                        height: 1,
-                        thickness: 1,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ):Container(),
+                                data == null
+                                    ? Container()
+                                    : Text(
+                                        snapshot.data!.snapshot
+                                            .value['Dissolved Oxygen']
+                                            .toStringAsFixed(3),
+                                        style: GoogleFonts.ptSans(
+                                          fontSize: 20,
+                                          color: Colors.orange,
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          )
+                        : Container(),
+                    map.containsKey('Dissolved Oxygen')
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 10, right: 20, left: 20, top: 10),
+                            child: Divider(
+                              height: 1,
+                              thickness: 1,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          )
+                        : Container(),
+                    map.containsKey('Temperature')
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                top: 8, right: 20, left: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Temperature',
+                                  style: GoogleFonts.ptSans(
+                                    fontSize: 20,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                data == null
+                                    ? Container()
+                                    : Text(
+                                        snapshot
+                                            .data!.snapshot.value['Temperature']
+                                            .toStringAsFixed(3),
+                                        style: GoogleFonts.ptSans(
+                                          fontSize: 20,
+                                          color: Colors.green,
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          )
+                        : Container(),
+                    map.containsKey('Temperature')
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 10, right: 20, left: 20, top: 10),
+                            child: Divider(
+                              height: 1,
+                              thickness: 1,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          )
+                        : Container(),
                     SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.only(right: 20, left: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            "Areator Controller",
-                            style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              color: Colors.black87,
-                            ),
+                          // Text(
+                          //   "Areator Controller",
+                          //   style: GoogleFonts.roboto(
+                          //     fontSize: 16,
+                          //     color: Colors.black87,
+                          //   ),
+                          // ),
+                          Row(
+                            children: [
+                              map.containsKey('Aerator-1')
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          color: map['Aerator-1'] == 1
+                                              ? Colors.blue
+                                              : Colors.transparent,
+                                          border:
+                                              Border.all(color: Colors.black)),
+                                      height: 20,
+                                      width: 20,
+                                    )
+                                  : Container(
+                                      color: Colors.grey,
+                                      height: 20,
+                                      width: 20,
+                                    ),
+                              SizedBox(width: 5),
+                              map.containsKey('Aerator-2')
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          color: map['Aerator-2'] == 1
+                                              ? Colors.blue
+                                              : Colors.transparent,
+                                          border:
+                                              Border.all(color: Colors.black)),
+                                      height: 20,
+                                      width: 20,
+                                    )
+                                  : Container(
+                                      color: Colors.grey,
+                                      height: 20,
+                                      width: 20,
+                                    ),
+                              SizedBox(width: 5),
+                              map.containsKey('Aerator-3')
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          color: map['Aerator-3'] == 1
+                                              ? Colors.blue
+                                              : Colors.transparent,
+                                          border:
+                                              Border.all(color: Colors.black)),
+                                      height: 20,
+                                      width: 20,
+                                    )
+                                  : Container(
+                                      color: Colors.grey,
+                                      height: 20,
+                                      width: 20,
+                                    ),
+                              SizedBox(width: 5),
+                              map.containsKey('Aerator-4')
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          color: map['Aerator-4'] == 1
+                                              ? Colors.blue
+                                              : Colors.transparent,
+                                          border:
+                                              Border.all(color: Colors.black)),
+                                      height: 20,
+                                      width: 20,
+                                    )
+                                  : Container(
+                                      color: Colors.grey,
+                                      height: 20,
+                                      width: 20,
+                                    ),
+                              SizedBox(width: 5),
+                              map.containsKey('Aerator-5')
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          color: map['Aerator-5'] == 1
+                                              ? Colors.blue
+                                              : Colors.transparent,
+                                          border:
+                                              Border.all(color: Colors.black)),
+                                      height: 20,
+                                      width: 20,
+                                    )
+                                  : Container(
+                                      color: Colors.grey,
+                                      height: 20,
+                                      width: 20,
+                                    ),
+                              SizedBox(width: 5),
+                              map.containsKey('Aerator-6')
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          color: map['Aerator-6'] == 1
+                                              ? Colors.blue
+                                              : Colors.transparent,
+                                          border:
+                                              Border.all(color: Colors.black)),
+                                      height: 20,
+                                      width: 20,
+                                    )
+                                  : Container(
+                                      color: Colors.grey,
+                                      height: 20,
+                                      width: 20,
+                                    ),
+                            ],
                           ),
-                          Switch(
-                            activeColor: Colors.black12,
-                            activeTrackColor: Colors.teal,
-                            value: _switchValue,
-                            onChanged: (newValue) {
-                              setState(() {
-                                _switchValue = newValue;
-                              });
-                            },
-                          ),
+                          // Switch(
+                          //   activeColor: Colors.black12,
+                          //   activeTrackColor: Colors.teal,
+                          //   value: _switchValue,
+                          //   onChanged: (newValue) {
+                          //     setState(() {
+                          //       _switchValue = newValue;
+                          //     });
+                          //   },
+                          // ),
+                          Container()
                         ],
                       ),
                     ),
