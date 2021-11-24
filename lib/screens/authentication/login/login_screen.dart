@@ -1,4 +1,5 @@
 import 'package:app/auth.dart';
+import 'package:app/screens/authentication/login/forgot_password.dart';
 import 'package:app/screens/authentication/signup/signup_form.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -127,14 +128,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           // );
                         },
                         child: InkWell(
-                          child: Text(
-                            "Forget Password?",
-                            textAlign: TextAlign.end,
-                            style: GoogleFonts.roboto(
-                              fontSize: 15,
-                              color: Theme.of(context).primaryColor,
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForgotPasswordPage(),
                             ),
-                            textScaleFactor: 1,
+                          );
+                            },
+                            child: Text(
+                              "Forget Password?",
+                              textAlign: TextAlign.end,
+                              style: GoogleFonts.roboto(
+                                fontSize: 15,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              textScaleFactor: 1,
+                            ),
                           ),
                         ),
                       ),
