@@ -158,7 +158,8 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                   EdgeInsets.only(top: 5, right: 20, left: 20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Color(0xFFFFC542),
+                                // color: Color(0xFFFFC542),
+                                color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.8),
@@ -258,7 +259,8 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                   EdgeInsets.only(top: 5, right: 20, left: 20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Color(0xFF3EC94C),
+                                // color: Color(0xFF3EC94C),
+                                color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.8),
@@ -357,7 +359,8 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                   EdgeInsets.only(top: 5, right: 20, left: 20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Color(0xFF359EBF),
+                                // color: Color(0xFF359EBF),
+                                color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.8),

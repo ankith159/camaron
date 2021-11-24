@@ -230,14 +230,18 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                                               : Colors.transparent,
                                           border:
                                               Border.all(color: Colors.black)),
-                                      height: 20,
-                                      width: 20,
-                                    )
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('1',
+                                              style: TextStyle(fontSize: 18))))
                                   : Container(
                                       color: Colors.grey,
-                                      height: 20,
-                                      width: 20,
-                                    ),
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('1',
+                                              style: TextStyle(fontSize: 18)))),
                               SizedBox(width: 5),
                               map.containsKey('Aerator-2')
                                   ? Container(
@@ -247,14 +251,18 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                                               : Colors.transparent,
                                           border:
                                               Border.all(color: Colors.black)),
-                                      height: 20,
-                                      width: 20,
-                                    )
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('2',
+                                              style: TextStyle(fontSize: 18))))
                                   : Container(
                                       color: Colors.grey,
-                                      height: 20,
-                                      width: 20,
-                                    ),
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('2',
+                                              style: TextStyle(fontSize: 18)))),
                               SizedBox(width: 5),
                               map.containsKey('Aerator-3')
                                   ? Container(
@@ -264,14 +272,18 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                                               : Colors.transparent,
                                           border:
                                               Border.all(color: Colors.black)),
-                                      height: 20,
-                                      width: 20,
-                                    )
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('3',
+                                              style: TextStyle(fontSize: 18))))
                                   : Container(
                                       color: Colors.grey,
-                                      height: 20,
-                                      width: 20,
-                                    ),
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('3',
+                                              style: TextStyle(fontSize: 18)))),
                               SizedBox(width: 5),
                               map.containsKey('Aerator-4')
                                   ? Container(
@@ -281,14 +293,18 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                                               : Colors.transparent,
                                           border:
                                               Border.all(color: Colors.black)),
-                                      height: 20,
-                                      width: 20,
-                                    )
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('4',
+                                              style: TextStyle(fontSize: 18))))
                                   : Container(
                                       color: Colors.grey,
-                                      height: 20,
-                                      width: 20,
-                                    ),
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('4',
+                                              style: TextStyle(fontSize: 18)))),
                               SizedBox(width: 5),
                               map.containsKey('Aerator-5')
                                   ? Container(
@@ -298,14 +314,18 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                                               : Colors.transparent,
                                           border:
                                               Border.all(color: Colors.black)),
-                                      height: 20,
-                                      width: 20,
-                                    )
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('5',
+                                              style: TextStyle(fontSize: 18))))
                                   : Container(
                                       color: Colors.grey,
-                                      height: 20,
-                                      width: 20,
-                                    ),
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('5',
+                                              style: TextStyle(fontSize: 18)))),
                               SizedBox(width: 5),
                               map.containsKey('Aerator-6')
                                   ? Container(
@@ -315,14 +335,18 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                                               : Colors.transparent,
                                           border:
                                               Border.all(color: Colors.black)),
-                                      height: 20,
-                                      width: 20,
-                                    )
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('6',
+                                              style: TextStyle(fontSize: 18))))
                                   : Container(
                                       color: Colors.grey,
-                                      height: 20,
-                                      width: 20,
-                                    ),
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('6',
+                                              style: TextStyle(fontSize: 18)))),
                             ],
                           ),
                           // Switch(
