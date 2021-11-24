@@ -27,7 +27,7 @@ class _AerationCalState extends State<AerationCal> {
         title: Padding(
           padding: const EdgeInsets.all(0),
           child: Text(
-            "Feeding Calculator",
+            "Aeration Calculator",
             style: GoogleFonts.roboto(
                 fontSize: 20,
                 color: Colors.black87,
@@ -36,74 +36,81 @@ class _AerationCalState extends State<AerationCal> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Number of stocking(*)'),
-            ListTile(
-              title: TextField(
-                controller: stocking,
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Number of stocking(*)'),
+              ListTile(
+                title: TextField(
+                  controller: stocking,
+                ),
+                trailing: Text('pcs'),
               ),
-              trailing: Text('pcs'),
-            ),
-            Text('Avg body weight(*)'),
-            ListTile(
-              title: TextField(
-                controller: bodyWeightPcs,
+              SizedBox(height: 8,),
+              Text('Avg body weight(*)'),
+              ListTile(
+                title: TextField(
+                  controller: bodyWeightPcs,
+                ),
+                trailing: Text('pcs/KG'),
               ),
-              trailing: Text('pcs/KG'),
-            ),
-            ListTile(
-              title: TextField(
-                controller: bodyWeight,
+              ListTile(
+                title: TextField(
+                  controller: bodyWeight,
+                ),
+                trailing: Text('g/pc'),
               ),
-              trailing: Text('g/pc'),
-            ),
-            Text('Operating hours/day(*)'),
-            ListTile(
-              title: TextField(
-                controller: operatingHours,
+              SizedBox(height: 8,),
+              Text('Operating hours/day(*)'),
+              ListTile(
+                title: TextField(
+                  controller: operatingHours,
+                ),
+                trailing: Text('hrs'),
               ),
-              trailing: Text('hrs'),
-            ),
-            Text('Number of Ponds'),
-            ListTile(
-              title: TextField(controller: numberOfPonds),
-              trailing: Text('ponds'),
-            ),
-            Text('Cost'),
-            ListTile(
-              title: TextField(
-                controller: costs,
+              SizedBox(height: 8,),
+              Text('Number of Ponds'),
+              ListTile(
+                title: TextField(controller: numberOfPonds),
+                trailing: Text('ponds'),
               ),
-              trailing: Text('\$/kWh'),
-            ),
-            SizedBox(height: 40),
-            Center(
-                child: ElevatedButton(
-                    onPressed: () {
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(user!.uid)
-                          .update({
-                        'aerationCalculator': {
-                          'stocking': stocking.text,
-                          'bodyWeightPcs': bodyWeightPcs.text,
-                          'bodyWeight': bodyWeight.text,
-                          'operatingHours': operatingHours.text,
-                          'costs': costs.text,
-                        }
-                      }).then((value) {
-                        stocking.clear();
-                        bodyWeight.clear();
-                        bodyWeightPcs.clear();
-                        operatingHours.clear();
-                        costs.clear();
-                      });
-                    },
-                    child: Text('Save')))
-          ],
+              SizedBox(height: 8,),
+              Text('Cost'),
+              ListTile(
+                title: TextField(
+                  controller: costs,
+                ),
+                trailing: Text('\$/kWh'),
+              ),
+              SizedBox(height: 35),
+              Center(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(user!.uid)
+                            .update({
+                          'aerationCalculator': {
+                            'stocking': stocking.text,
+                            'bodyWeightPcs': bodyWeightPcs.text,
+                            'bodyWeight': bodyWeight.text,
+                            'operatingHours': operatingHours.text,
+                            'costs': costs.text,
+                          }
+                        }).then((value) {
+                          stocking.clear();
+                          bodyWeight.clear();
+                          bodyWeightPcs.clear();
+                          operatingHours.clear();
+                          costs.clear();
+                        });
+                      },
+                      child: Text('Save')))
+            ],
+          ),
         ),
       ),
     );

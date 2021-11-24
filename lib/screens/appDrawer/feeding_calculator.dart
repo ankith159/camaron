@@ -41,6 +41,11 @@ class _FeedingCalState extends State<FeedingCal> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+                "Feeds is among the largest operational cost of shrimp farming and every efforts should be made to ensure efficient utilization of feeds for growth. The feed is also intial source of pollutants; hence, overfeeding or poor quality feeds can severely impact water quality and production. Feed management strategies should therefore be aimed at optimizing feed inputs, reducing feed conversion ratio and reducing the potetial impact on the culture and efficient water. The Feeding Calculator helps farmers find out how much amount of feeds should you feed your shrimp ponds."),
+            SizedBox(
+              height: 12,
+            ),
             DropdownButton<String>(
                 value: species,
                 onChanged: (val) {

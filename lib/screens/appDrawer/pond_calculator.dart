@@ -25,7 +25,7 @@ class _PondCalState extends State<PondCal> {
         title: Padding(
           padding: const EdgeInsets.all(0),
           child: Text(
-            "Feeding Calculator",
+            "Pond Calculator",
             style: GoogleFonts.roboto(
                 fontSize: 20,
                 color: Colors.black87,

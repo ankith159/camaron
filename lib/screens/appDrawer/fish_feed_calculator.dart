@@ -18,9 +18,14 @@ class _FishFeedCalState extends State<FishFeedCal> {
   TextEditingController ingredient3 = TextEditingController();
   TextEditingController ingredient4 = TextEditingController();
   var user = FirebaseAuth.instance.currentUser;
+  var valueChoose;
+  List listItem = ['Cotton Seed Meal - 44.30CP', 'Fish Meal- 55.00CP', 'Groundnut Cake - 34.50CP', 'Ipil-Ipil Seed - 35.80CP', 'Rape Seed -  37.40CP', 'Soyabean Meal - 46.80CP', 'Sunflower Seed - 34.10CP'];
+  var valueSelect;
+  List listItems = ['Maize Meal - 9.80CP', 'Rice Bran - 13.30CP', 'Sorghum Bran - 8.90CP', 'Wheat Bran - 18.80CP'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         titleSpacing: 0,
         title: Padding(
@@ -70,27 +75,104 @@ class _FishFeedCalState extends State<FishFeedCal> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('Ingredient 1'),
-                      ListTile(
-                        title: TextField(
-                          controller: ingredient1,
-                          decoration: InputDecoration(hintText: 'Ingredient 1'),
-                        ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 7),
+                         child: Container(
+                           padding: const EdgeInsets.only(left: 10, right: 10),
+                            decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.black, width: 1),
+                          borderRadius: BorderRadius.circular(6),
                       ),
+                           child: DropdownButton(
+                            hint:  Text(
+                              'Ingredient 1',
+                              style: TextStyle(
+                                  color: Colors.grey[600],),
+                            ),
+                            dropdownColor: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black,
+                            ),
+                            iconSize: 26,
+                            isExpanded: true,
+                            underline: const SizedBox(
+                              width: 0,
+                            ),
+                            value: valueChoose,
+                            onChanged: (newValue) {
+                              setState(
+                                () {
+                                  valueChoose = newValue;
+                                },
+                              );
+                            },
+                            items: listItem.map(
+                              (valueItem) {
+                                return DropdownMenuItem(
+                                  value: valueItem,
+                                  child: Text(valueItem),
+                                );
+                              },
+                            ).toList(),
+                      ),
+                         ),
+                       ),
                     ],
                   ),
                 ),
+                SizedBox(width: 15,),
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('Ingredient 2'),
-                      ListTile(
-                        title: TextField(
-                          controller: ingredient2,
-                          decoration: InputDecoration(hintText: 'Ingredient 2'),
-                        ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 7),
+                         child: Container(
+                           padding: const EdgeInsets.only(left: 10, right: 10),
+                            decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.black, width: 1),
+                          borderRadius: BorderRadius.circular(6),
                       ),
+                           child: DropdownButton(
+                            hint:  Text(
+                              'Ingredient 2',
+                              style: TextStyle(
+                                  color: Colors.grey[600],),
+                            ),
+                            dropdownColor: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black,
+                            ),
+                            iconSize: 26,
+                            isExpanded: true,
+                            underline: const SizedBox(
+                              width: 0,
+                            ),
+                            value: valueSelect,
+                            onChanged: (newValue) {
+                              setState(
+                                () {
+                                  valueSelect = newValue;
+                                },
+                              );
+                            },
+                            items: listItems.map(
+                              (valueItems) {
+                                return DropdownMenuItem(
+                                  value: valueItems,
+                                  child: Text(valueItems),
+                                );
+                              },
+                            ).toList(),
+                      ),
+                         ),
+                       ),
                     ],
                   ),
                 ),

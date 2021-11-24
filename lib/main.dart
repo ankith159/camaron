@@ -21,6 +21,7 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Wrapper(),
       theme: ThemeData(
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
