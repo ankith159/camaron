@@ -32,6 +32,39 @@ class _ChangePageState extends State<ChangePage> {
             textScaleFactor: 1,
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(18),
+            child: GestureDetector(
+              onTap: () async {
+                if (type == 'Type')
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('Select the type')));
+                var data = type == 'Fishes'
+                    ? fishes
+                    : type == 'Prawns'
+                        ? prawns
+                        : type == 'Clams'
+                            ? clams
+                            : oyesters;
+                if (data != 'subtype')
+                  await FirebaseFirestore.instance
+                      .collection('devices')
+                      .doc(widget.id)
+                      .update({'creature': data});
+                if (type != 'Type') Navigator.pop(context);
+              },
+              child: Text(
+                'Save',
+                style: GoogleFonts.roboto(
+                  fontSize: 15,
+                  color: Colors.black87,
+                ),
+                textScaleFactor: 1,
+              ),
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -474,30 +507,6 @@ class _ChangePageState extends State<ChangePage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 50,
-            ),
-            Center(
-                child: ElevatedButton(
-                    onPressed: () async {
-                      if(type == 'Type')
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Select the type')));
-                      var data = type == 'Fishes'
-                          ? fishes
-                          : type == 'Prawns'
-                              ? prawns
-                              : type == 'Clams'
-                                  ? clams
-                                  : oyesters;
-                      if(data!='subtype')
-                      await FirebaseFirestore.instance
-                          .collection('devices')
-                          .doc(widget.id)
-                          .update({'creature': data});
-                      if(type != 'Type')
-                      Navigator.pop(context);
-                    },
-                    child: Text('Select'))),
             SizedBox(
               height: 50,
             ),

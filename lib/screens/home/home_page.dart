@@ -77,40 +77,42 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Theme.of(context).primaryColor),
-                  child: ExpansionTile(
-                      collapsedTextColor: Colors.black,
-                      textColor: Colors.black,
-                      collapsedBackgroundColor: Theme.of(context).primaryColor,
-                      title: Text(
-                        'Select Device',
-                        style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.w500),
-                      ),
-                      children: List.generate(
-                          list.length,
-                          (index) => Container(
-                                color: Colors.white,
-                                child: ListTile(
-                                    title: Text(
-                                      list[index],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    onTap: () {
-                                      showGeneralDialog(
-                                        context: context,
-                                        pageBuilder: (context, _, a) {
-                                          return DeviceDialog(list[index]);
-                                        },
-                                      );
-                                    }),
-                              )))))
+            padding: const EdgeInsets.all(30.0),
+            child: Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Theme.of(context).primaryColor),
+              child: ExpansionTile(
+                collapsedTextColor: Colors.black,
+                textColor: Colors.black,
+                collapsedBackgroundColor: Theme.of(context).primaryColor,
+                title: Text(
+                  'Select Device',
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+                ),
+                children: List.generate(
+                  list.length,
+                  (index) => Container(
+                    color: Colors.white,
+                    child: ListTile(
+                        title: Text(
+                          list[index],
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        ),
+                        onTap: () {
+                          showGeneralDialog(
+                            context: context,
+                            pageBuilder: (context, _, a) {
+                              return DeviceDialog(list[index]);
+                            },
+                          );
+                        }),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

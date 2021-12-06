@@ -59,9 +59,9 @@ class _SelectDeviceStatPageState extends State<SelectDeviceStatPage> {
       appBar: AppBar(
         titleSpacing: 0,
         title: Padding(
-          padding: const EdgeInsets.all(0),
+          padding: const EdgeInsets.all(8),
           child: Text(
-            " Manage Devices",
+            "Statistics",
             style: GoogleFonts.roboto(
                 fontSize: 20,
                 color: Colors.black87,

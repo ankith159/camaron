@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         },
                         child: RichText(
-                          textAlign: TextAlign.end,
+                          textAlign: TextAlign.center,
                           text: TextSpan(
                             text: "Don't have an account ? ",
                             style: GoogleFonts.roboto(

@@ -15,7 +15,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   void launchWhatsapp({@required number, @required message}) async {
-    String url = "whatsapp://send?phone=+919493757509&text=$message";
+    String url = "whatsapp://send?phone=+919962938974&text=$message";
     await canLaunch(url) ? launch(url) : print("can't open whatsapp");
   }
 
@@ -253,8 +253,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             IconButton(
                               onPressed: () {
                                 launchWhatsapp(
-                                    number: "+919493757509",
-                                    message: "hey ankith");
+                                    number: "+919962938974",
+                                    message: "Support-Camaron");
                               },
                               icon: Icon(
                                 Icons.share,
@@ -263,7 +263,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  launch('mailto:rajatrrpalankar@gmail.com');
+                                  launch('mailto:info@robicrufarm.com');
                                 },
                                 icon: Icon(
                                   Icons.mail,

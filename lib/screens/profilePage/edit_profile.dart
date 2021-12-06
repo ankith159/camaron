@@ -1,3 +1,4 @@
+import 'package:app/screens/authentication/login/forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         titleSpacing: 0,
@@ -82,61 +84,92 @@ class _EditProfileState extends State<EditProfile> {
                     SizedBox(
                       height: 15,
                     ),
-                    // Text(
-                    //   "Email Id",
-                    //   style: GoogleFonts.roboto(
-                    //     fontSize: 16,
-                    //     color: Colors.black,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    //   textScaleFactor: 1,
-                    // ),
-                    // SizedBox(height: 8),
-                    // TextField(
-                    //   decoration: InputDecoration(
-                    //     labelText: "a***********@gmail.com",
-                    //     labelStyle: GoogleFonts.ptSans(
-                    //       fontSize: 13,
-                    //       color: Colors.black54,
-                    //     ),
-                    //     enabledBorder: OutlineInputBorder(
-                    //       borderSide: BorderSide(color: Colors.teal),
-                    //       borderRadius: BorderRadius.circular(8),
-                    //     ),
-                    //   ),
-                    //   maxLines: 1,
-                    // ),
-                    // SizedBox(
-                    //   height: 15,
-                    // ),
-                    // Text(
-                    //   "Phone Number",
-                    //   style: GoogleFonts.roboto(
-                    //     fontSize: 16,
-                    //     color: Colors.black,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    //   textScaleFactor: 1,
-                    // ),
-                    // SizedBox(height: 8),
-                    // TextField(
-                    //   decoration: InputDecoration(
-                    //     labelText: "**********",
-                    //     labelStyle: GoogleFonts.ptSans(
-                    //       fontSize: 13,
-                    //       color: Colors.black54,
-                    //     ),
-                    //     enabledBorder: OutlineInputBorder(
-                    //       borderSide: BorderSide(color: Colors.teal),
-                    //       borderRadius: BorderRadius.circular(8),
-                    //     ),
-                    //   ),
-                    //   maxLines: 1,
-                    // ),
+                    Container(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ForgotPasswordPage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Change Password",
+                          style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      width: double.maxFinite,
+                      padding: EdgeInsets.only(top: 18, bottom: 18),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "assets/next.png",
+                            ),
+                            alignment: Alignment.topRight,
+                            fit: BoxFit.contain,
+                          ),
+                          // color: Theme.of(context).primaryColor,
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Theme.of(context).primaryColor))),
+                    ),
                   ],
                 ),
+                // Text(
+                //   "Email Id",
+                //   style: GoogleFonts.roboto(
+                //     fontSize: 16,
+                //     color: Colors.black,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                //   textScaleFactor: 1,
+                // ),
+                // SizedBox(height: 8),
+                // TextField(
+                //   decoration: InputDecoration(
+                //     labelText: "a***********@gmail.com",
+                //     labelStyle: GoogleFonts.ptSans(
+                //       fontSize: 13,
+                //       color: Colors.black54,
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(color: Colors.teal),
+                //       borderRadius: BorderRadius.circular(8),
+                //     ),
+                //   ),
+                //   maxLines: 1,
+                // ),
+                // SizedBox(
+                //   height: 15,
+                // ),
+                // Text(
+                //   "Phone Number",
+                //   style: GoogleFonts.roboto(
+                //     fontSize: 16,
+                //     color: Colors.black,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                //   textScaleFactor: 1,
+                // ),
+                // SizedBox(height: 8),
+                // TextField(
+                //   decoration: InputDecoration(
+                //     labelText: "**********",
+                //     labelStyle: GoogleFonts.ptSans(
+                //       fontSize: 13,
+                //       color: Colors.black54,
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(color: Colors.teal),
+                //       borderRadius: BorderRadius.circular(8),
+                //     ),
+                //   ),
+                //   maxLines: 1,
+                // ),
               ),
-              SizedBox(height: 0),
               Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: MaterialButton(

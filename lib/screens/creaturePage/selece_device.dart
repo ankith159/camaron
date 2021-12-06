@@ -59,9 +59,9 @@ class _SelectDevicePageState extends State<SelectDevicePage> {
       appBar: AppBar(
         titleSpacing: 0,
         title: Padding(
-          padding: const EdgeInsets.all(0),
+          padding: const EdgeInsets.all(8),
           child: Text(
-            " Manage Devices",
+            "Creatures",
             style: GoogleFonts.roboto(
                 fontSize: 20,
                 color: Colors.black87,

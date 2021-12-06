@@ -1,4 +1,5 @@
 import 'package:app/screens/appDrawer/app_drawer.dart';
+import 'package:app/screens/creaturePage/selece_device.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -131,7 +132,14 @@ class _CreaturesPageState extends State<CreaturesPage> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10, right: 52),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                               Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SelectDevicePage(),
+                                ),
+                              );
+                            },
                             child: Text(
                               'Done',
                               style: GoogleFonts.roboto(

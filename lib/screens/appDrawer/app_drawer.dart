@@ -1,6 +1,7 @@
 import 'package:app/screens/creaturePage/selece_device.dart';
 import 'package:app/screens/devicePage/device_page.dart';
 import 'package:app/screens/profilePage/settings_page.dart';
+import 'package:app/screens/profilePage/support_page.dart';
 import 'package:app/screens/statisticsPage/selece_device_stat.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
@@ -194,7 +195,11 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                //TODO
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SupportPage(),
+                    ));
               },
             ),
             ListTile(

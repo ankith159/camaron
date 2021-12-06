@@ -1,3 +1,4 @@
+import 'package:app/screens/devicePage/device_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -36,6 +37,7 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         titleSpacing: 0,
         title: Padding(
@@ -178,6 +180,11 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                       addDevice();
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Device added')));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const DevicesPage(),
+                        ),
+                      );
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Error adding device')));
