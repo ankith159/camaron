@@ -246,7 +246,8 @@ class _SignupFormState extends State<SignupForm> {
                               setState(() {
                                 _loading = true;
                               });
-                              await AuthService().sendOtp('+91' + phone.text);
+                              await AuthService()
+                                  .sendOtp('+91' + phone.text, context);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

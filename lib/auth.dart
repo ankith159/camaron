@@ -1,4 +1,5 @@
 import 'package:app/user.dart';
+import 'package:flutter/material.dart';
 import 'codeSent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -43,11 +44,17 @@ class AuthService {
   }
 
   //Login with phone
-  Future sendOtp(String phone) async {
+  Future sendOtp(String phone, BuildContext context) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phone,
-      verificationCompleted: (auth.PhoneAuthCredential credential) {},
-      verificationFailed: (auth.FirebaseAuthException e) {},
+      verificationCompleted: (auth.PhoneAuthCredential credential) {
+        linkCredential(credential);
+      },
+      verificationFailed: (auth.FirebaseAuthException e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.message!)));
+        Navigator.pop(context);
+      },
       codeSent: (String verificationId, int? resendToken) async {
         code = CodeSent(verificationId, resendToken);
       },

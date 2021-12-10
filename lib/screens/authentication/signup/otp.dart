@@ -34,7 +34,13 @@ class _SignupOtpState extends State<SignupOtp> {
                   if (credential.smsCode == value) {
                     await AuthService()
                         .registerEmailPass(widget.email, widget.password);
-                    await AuthService().linkCredential(credential);
+                    try {
+                      await AuthService().linkCredential(credential);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Acc already exists')));
+                      Navigator.pop(context);
+                    }
                   }
 
                   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
