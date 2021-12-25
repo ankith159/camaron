@@ -223,28 +223,18 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                           Row(
                             children: [
                               map.containsKey('Aerator-1')
-                                  ? InkWell(
-                                      onTap: () {
-                                        database
-                                            .reference()
-                                            .child('devices')
-                                            .child(widget.name)
-                                            .child('Aerator-1')
-                                            .set(map['Aerator-1'] == 1 ? 0 : 1);
-                                      },
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              color: map['Aerator-1'] == 1
-                                                  ? Colors.blue
-                                                  : Colors.transparent,
-                                              border: Border.all(
-                                                  color: Colors.black)),
-                                          height: 40,
-                                          width: 40,
-                                          child: Center(
-                                              child: Text('1',
-                                                  style: TextStyle(
-                                                      fontSize: 18)))),
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          color: map['Aerator-1'] == 1
+                                              ? Colors.blue
+                                              : Colors.transparent,
+                                          border:
+                                              Border.all(color: Colors.black)),
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('1',
+                                              style: TextStyle(fontSize: 18))),
                                     )
                                   : Container(
                                       color: Colors.grey,
@@ -364,18 +354,14 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                             Switch(
                               activeColor: Colors.black12,
                               activeTrackColor: Colors.teal,
-                              value: map['Aerator Switch'],
+                              value: map['Aerator Switch'] > 0,
                               onChanged: (newValue) {
-                                setState(() {
-                                  _switchValue = newValue;
-                                });
-
                                 database
                                     .reference()
                                     .child('devices')
                                     .child(widget.name)
                                     .child('Aerator Switch')
-                                    .set(!map['Aerator Switch']);
+                                    .set(map['Aerator Switch'] > 0 ? 0 : 1);
                               },
                             ),
                           Container()

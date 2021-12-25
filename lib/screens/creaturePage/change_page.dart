@@ -80,6 +80,11 @@ class _ChangePageState extends State<ChangePage> {
                         value: 'Fishes',
                         groupValue: type,
                         onChanged: (value) {
+                          fishes = 'subtype';
+                          oyesters = 'subtype';
+                          clams = 'subtype';
+                          prawns = 'subtype';
+
                           setState(() {
                             type = 'Fishes';
                           });
@@ -349,6 +354,10 @@ class _ChangePageState extends State<ChangePage> {
                     value: 'Oyesters',
                     groupValue: type,
                     onChanged: (value) {
+                      fishes = 'subtype';
+                      oyesters = 'subtype';
+                      clams = 'subtype';
+                      prawns = 'subtype';
                       setState(() {
                         type = 'Oyesters';
                       });
@@ -395,6 +404,10 @@ class _ChangePageState extends State<ChangePage> {
                     value: 'Clams',
                     groupValue: type,
                     onChanged: (value) {
+                      fishes = 'subtype';
+                      oyesters = 'subtype';
+                      clams = 'subtype';
+                      prawns = 'subtype';
                       setState(() {
                         type = 'Clams';
                       });
@@ -442,6 +455,10 @@ class _ChangePageState extends State<ChangePage> {
                     groupValue: type,
                     onChanged: (value) {
                       setState(() {
+                        fishes = 'subtype';
+                        oyesters = 'subtype';
+                        clams = 'subtype';
+                        prawns = 'subtype';
                         type = 'Prawns';
                       });
                     }),
