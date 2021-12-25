@@ -1,4 +1,5 @@
 import 'package:app/screens/appDrawer/app_drawer.dart';
+import 'package:app/screens/tab_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,8 +17,20 @@ class _DevicesPageState extends State<DevicesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: AppDrawer(),
       appBar: AppBar(
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TabPage(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
         titleSpacing: 0,
         title: Padding(
           padding: const EdgeInsets.all(0),

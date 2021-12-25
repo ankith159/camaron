@@ -1,4 +1,5 @@
 import 'package:app/screens/appDrawer/app_drawer.dart';
+import 'package:app/screens/tab_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -23,8 +24,20 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: AppDrawer(),
       appBar: AppBar(
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TabPage(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
         titleSpacing: 0,
         title: Text(
           "Profile",
@@ -250,15 +263,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            IconButton(
-                              onPressed: () {
+                            GestureDetector(
+                              onTap: () {
                                 launchWhatsapp(
                                     number: "+919962938974",
                                     message: "Support-Camaron");
                               },
-                              icon: Icon(
-                                Icons.share,
-                                size: 30,
+                              child: Image(
+                                image: AssetImage('assets/whatsapp.png'),
+                                height: 28,
                               ),
                             ),
                             IconButton(

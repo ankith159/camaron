@@ -1,4 +1,5 @@
 import 'package:app/screens/devicePage/device_page.dart';
+import 'package:app/screens/tab_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -33,6 +34,7 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
 
   TextEditingController deviceId = TextEditingController();
   TextEditingController name = TextEditingController();
+  TextEditingController number = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +109,7 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                     ),
                     SizedBox(height: 8),
                     TextField(
+                      controller: number,
                       decoration: InputDecoration(
                         labelText: "Phone Number",
                         labelStyle: GoogleFonts.ptSans(
@@ -119,7 +122,8 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      maxLines: 1,
+                      maxLength: 10,
+                      keyboardType: TextInputType.phone,
                     ),
                     SizedBox(
                       height: 15,
@@ -179,10 +183,10 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                     try {
                       addDevice();
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Device added')));
+                          SnackBar(content: Text('Device added Successfully')));
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const DevicesPage(),
+                          builder: (context) => TabPage(),
                         ),
                       );
                     } catch (e) {
