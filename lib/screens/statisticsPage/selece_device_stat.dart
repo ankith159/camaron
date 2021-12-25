@@ -1,4 +1,5 @@
 import 'package:app/screens/statisticsPage/statistics_page.dart';
+import 'package:app/screens/tab_page.dart';
 import 'package:app/static_data.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,19 @@ class _SelectDeviceStatPageState extends State<SelectDeviceStatPage> {
     list = data.keys.toList();
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TabPage(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
         titleSpacing: 0,
         title: Padding(
           padding: const EdgeInsets.all(8),
