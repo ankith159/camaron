@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../main.dart';
+
 class SignupOtp extends StatefulWidget {
   final email;
   final password;
@@ -18,13 +20,26 @@ class _SignupOtpState extends State<SignupOtp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Verify'),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(40.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/phone.png'),
+              Image.asset(
+                'assets/phone.png',
+                height: 200,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text('Enter OTP'),
+              SizedBox(
+                height: 20,
+              ),
               PinCodeTextField(
                 appContext: context,
                 length: 6,
@@ -45,8 +60,10 @@ class _SignupOtpState extends State<SignupOtp> {
 
                   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
                   _auth.currentUser!.updateDisplayName(widget.name);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => VerifiedScreen()));
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => Wrapper()),
+                      (route) => false);
                 },
               )
             ],
