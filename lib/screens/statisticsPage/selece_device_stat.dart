@@ -42,6 +42,7 @@ class _SelectDeviceStatPageState extends State<SelectDeviceStatPage> {
           .child(element.data()['deviceId'])
           .get();
       deviceList.add(doc);
+      if(mounted)
       setState(() {
         deviceList = deviceList;
       });

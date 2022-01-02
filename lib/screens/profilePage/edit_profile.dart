@@ -12,7 +12,16 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  final user = auth.FirebaseAuth.instance.currentUser;
   TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.text = user!.displayName!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

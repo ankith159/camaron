@@ -21,6 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   var _auth = auth.FirebaseAuth.instance;
+  var name = auth.FirebaseAuth.instance.currentUser!.displayName;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +48,16 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.push(
+            onPressed: () async {
+              await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => EditProfile(),
                 ),
               );
+              setState(() {
+                name = auth.FirebaseAuth.instance.currentUser!.displayName;
+              });
             },
             icon: Icon(Icons.edit),
             color: Colors.black,
@@ -127,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 78, top: 70),
                             child: Text(
-                              _auth.currentUser!.displayName ?? '',
+                              name ?? '',
                               style: GoogleFonts.roboto(
                                   fontSize: 20,
                                   color: Colors.black87,
@@ -250,39 +254,42 @@ class _ProfilePageState extends State<ProfilePage> {
           GestureDetector(
             onTap: () async {
               // launchWhatsapp(number: "+919493757509", message: "hey ankith");
-              showBottomSheet(
+              showDialog(
                   context: context,
-                  builder: (context) => Container(
-                        height: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30)),
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                launchWhatsapp(
-                                    number: "+919962938974",
-                                    message: "Support-Camaron");
-                              },
-                              child: Image(
-                                image: AssetImage('assets/whatsapp.png'),
-                                height: 28,
-                              ),
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  launch('mailto:info@robicrufarm.com');
+                  builder: (context) => AlertDialog(
+                        contentPadding: EdgeInsets.zero,
+                        content: Container(
+                          height: 150,
+                          decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.only(
+                            //     topLeft: Radius.circular(30),
+                            //     topRight: Radius.circular(30)),
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  launchWhatsapp(
+                                      number: "+919962938974",
+                                      message: "Support-Camaron");
                                 },
-                                icon: Icon(
-                                  Icons.mail,
-                                  size: 30,
-                                )),
-                          ],
+                                child: Image(
+                                  image: AssetImage('assets/whatsapp.png'),
+                                  height: 28,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    launch('mailto:info@robicrufarm.com');
+                                  },
+                                  icon: Icon(
+                                    Icons.mail,
+                                    size: 30,
+                                  )),
+                            ],
+                          ),
                         ),
                       ));
             },

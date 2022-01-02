@@ -24,7 +24,7 @@ class _ManageDevicePageState extends State<ManageDevicePage> {
 
   List<DataSnapshot?> deviceList = [];
   var list = [];
-
+  List<String> idList = [];
   Future getDevices() async {
     var _auth = auth.FirebaseAuth.instance;
     QuerySnapshot<Map<String, dynamic>> devices = await FirebaseFirestore
@@ -40,6 +40,7 @@ class _ManageDevicePageState extends State<ManageDevicePage> {
           .child('devices')
           .child(element.data()['deviceId'])
           .get();
+      idList.add(element.id);
       deviceList.add(doc);
       setState(() {
         deviceList = deviceList;
@@ -75,7 +76,10 @@ class _ManageDevicePageState extends State<ManageDevicePage> {
         padding: EdgeInsets.all(15),
         child: ListView.builder(
             itemCount: list.length,
-            itemBuilder: (ctx, index) => ManageDeviceCard(name: list[index])),
+            itemBuilder: (ctx, index) => ManageDeviceCard(
+                  idList[index],
+                  name: list[index],
+                )),
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -101,7 +105,9 @@ class _ManageDevicePageState extends State<ManageDevicePage> {
 
 class ManageDeviceCard extends StatelessWidget {
   final String name;
-  const ManageDeviceCard({Key? key, required this.name}) : super(key: key);
+  final String id;
+  const ManageDeviceCard(this.id, {Key? key, required this.name})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +116,10 @@ class ManageDeviceCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DeviceOnePage(name),
+            builder: (context) => DeviceOnePage(
+              name,
+              id
+            ),
           ),
         );
       },

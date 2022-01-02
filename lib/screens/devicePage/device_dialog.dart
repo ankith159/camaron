@@ -189,31 +189,31 @@ class _DeviceDialogState extends State<DeviceDialog> {
                       ),
                     ):Container(),
                         SizedBox(height: 10),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                "Areator Controller",
-                                style: GoogleFonts.roboto(
-                                  fontSize: 16,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              Switch(
-                                activeColor: Colors.black12,
-                                activeTrackColor: Colors.teal,
-                                value: _switchValue,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _switchValue = newValue;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 20, right: 20),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     children: <Widget>[
+                        //       Text(
+                        //         "Areator Controller",
+                        //         style: GoogleFonts.roboto(
+                        //           fontSize: 16,
+                        //           color: Colors.black87,
+                        //         ),
+                        //       ),
+                        //       Switch(
+                        //         activeColor: Colors.black12,
+                        //         activeTrackColor: Colors.teal,
+                        //         value: _switchValue,
+                        //         onChanged: (newValue) {
+                        //           setState(() {
+                        //             _switchValue = newValue;
+                        //           });
+                        //         },
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                         SizedBox(height: 10),
                         // Padding(
                         //   padding: const EdgeInsets.all(20.0),

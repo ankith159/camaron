@@ -1,13 +1,18 @@
 import 'package:app/static_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../user.dart';
 
 class DeviceOnePage extends StatefulWidget {
   final String name;
-  DeviceOnePage(this.name);
+  final String id;
+  DeviceOnePage(this.name, this.id);
 
   @override
   _DeviceOnePageState createState() => _DeviceOnePageState();
@@ -373,12 +378,15 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         OutlinedButton(
-                          onPressed: () {
-                            showDialog(
+                          onPressed: ()async {
+                           await showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return DeleteDialog();
+                                  return DeleteDialog(widget.id);
                                 });
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            
                           },
                           child: Text(
                             'Delete',
@@ -443,7 +451,8 @@ class _DeviceOnePageState extends State<DeviceOnePage> {
 }
 
 class DeleteDialog extends StatelessWidget {
-  const DeleteDialog({Key? key}) : super(key: key);
+  final String id;
+  const DeleteDialog(this.id, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -471,22 +480,30 @@ class DeleteDialog extends StatelessWidget {
           ),
         ),
         CupertinoDialogAction(
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Text(
-              'Delete',
-              style: GoogleFonts.roboto(
-                fontSize: 16,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+          child: Builder(builder: (context) {
+            return ElevatedButton(
+              onPressed: () {
+                FirebaseFirestore.instance
+                    .collection('devices')
+                    .doc(id)
+                    .delete();
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Delete',
+                style: GoogleFonts.roboto(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            style: ElevatedButton.styleFrom(
-                primary: Colors.redAccent,
-                padding: EdgeInsets.symmetric(horizontal: 34, vertical: 15),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10))),
-          ),
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.redAccent,
+                  padding: EdgeInsets.symmetric(horizontal: 34, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
+            );
+          }),
         ),
       ],
     );

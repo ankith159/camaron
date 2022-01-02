@@ -1,6 +1,7 @@
 import 'package:app/screens/devicePage/device_page.dart';
 import 'package:app/screens/tab_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -110,6 +111,7 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                     SizedBox(height: 8),
                     TextField(
                       controller: number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
                         labelText: "Phone Number",
                         labelStyle: GoogleFonts.ptSans(
@@ -180,6 +182,11 @@ class _AddNewDevicePageState extends State<AddNewDevicePage> {
                     textScaleFactor: 1,
                   ),
                   onPressed: () {
+                    if (number.text.length != 10) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Please enter a valid phone number')));
+                      return;
+                    }
                     try {
                       addDevice();
                       ScaffoldMessenger.of(context).showSnackBar(
